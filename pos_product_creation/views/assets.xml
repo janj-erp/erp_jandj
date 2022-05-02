@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <template id="assets" inherit_id="point_of_sale.assets_common">-->
+<!--        <xpath expr="." position="inside">-->
+<!--            <script type="text/javascript" src="/pos_product_creation/static/src/js/product_create_popup.js"></script>-->
+<!--            <script type="text/javascript" src="/pos_product_creation/static/src/js/product_create_button.js"></script>-->
+<!--        </xpath>-->
+<!--    </template>-->
+    <data>
+        <record id='stock_request_pos_custom_form' model="ir.ui.view">
+            <field name="name">stock.request.from.pos.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="group_id" position="after">
+                    <field name="is_request" readonly="1"/>
+                    <field name="is_pos_reserve" readonly="1"/>
+                </field>
+            </field>
+        </record>
+        <record id='stock_request_pos_custom_form' model="ir.ui.view">
+            <field name="name">stock.request.from.pos.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='starred']" position="after">
+                    <separator/>
+                    <filter string="POS Requests" name="is_request" domain="[('is_request', '=', True)]"/>
+                    <filter string="POS Reserved" name="is_pos_reserve" domain="[('is_pos_reserve', '=', True)]"/>
+<!--                <filter string="Industry" name="industry" domain="[('industry', '=', True)]"/>-->
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_picking_tree_requests" model="ir.actions.act_window">
+            <field name="name">POS Stock Requests</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{'contact_display': 'partner_address', 'default_company_id': allowed_company_ids[0],
+                                   'search_default_is_request': 1}</field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No transfer found. Let's create one!
+                </p><p>
+                    Transfers allow you to move products from one location to another.
+                </p>
+            </field>
+        </record>
+        <menuitem id="all_picking_requests" name="POS Transfer Requests" parent="stock.menu_stock_warehouse_mgmt" sequence="2" action="action_picking_tree_requests" groups="stock.group_stock_manager,stock.group_stock_user"/>
+
+<!--        <record id="action_picking_tree_reserves" model="ir.actions.act_window">-->
+<!--            <field name="name">POS Stock Reserves</field>-->
+<!--            <field name="res_model">stock.picking</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="view_mode">tree,kanban,form,calendar</field>-->
+<!--            <field name="domain"></field>-->
+<!--            <field name="context">{'contact_display': 'partner_address', 'default_company_id': allowed_company_ids[0],-->
+<!--                                   'search_default_is_pos_reserve': 1}</field>-->
+<!--            <field name="search_view_id" ref="stock.view_picking_internal_search"/>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="o_view_nocontent_smiling_face">-->
+<!--                    No transfer found. Let's create one!-->
+<!--                </p><p>-->
+<!--                    Transfers allow you to move products from one location to another.-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--        <menuitem id="all_picking_reserves" name="POS Reserved" parent="stock.menu_stock_warehouse_mgmt" sequence="3" action="action_picking_tree_reserves" groups="stock.group_stock_manager,stock.group_stock_user"/>-->
+
+    </data>
+</odoo>

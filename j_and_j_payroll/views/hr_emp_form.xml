@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="employee_form_inherit_hr_payroll" model="ir.ui.view">
+        <field name="name">hr.employee</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='public']/div/div/group" position="inside">
+                <field name="salary"/>
+                <field name="structure"/>
+                <field name="trn_number"/>
+                <field name="nis_number"/>
+            </xpath>
+        </field>
+</record>
+
+
+   <record id="view_hr_payslip_form_inherit_others" model="ir.ui.view">
+        <field name="name">hr.payslip.form.inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='account_info']" position="inside">
+                <group>
+                   <group string="Deductions">
+                        <field name="paye_deduction"/>
+                        <field name="loan_repayment"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                    <group string="Working days/hours">
+                        <field name="working_week" invisible="1"/>
+                        <field name="total_hours"/>
+                        <field name="holiday_ot"/>
+                        <field name="public_leave_days"/>
+                        <field name="leave_type"/>
+                        <field name="unpaid_days"/>
+                    </group>
+                    <group string="Allowances">
+                        <field name="allowances"/>
+                        <field name="travel_allowance"/>
+                        <field name="entertainment"/>
+                        <field name="accommodation"/>
+                        <field name="total_days"/>
+                        <field name="total_sundays"/>
+                        <field name="spl_ot_amount"/>
+                        <field name="ot_amount"/>
+                    </group>
+                    <group string="Bonus">
+                        <field name="vacation_type"/>
+                        <field name="vacation_period"/>
+                        <field name="maternity_leave_type"/>
+                        <field name="maternity_period"/>
+                        <field name="bonus"/>
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                    <page name ="ytd_details" string="Year To Date">
+                        <group>
+                            <group>
+                                <field name="ytd_basic"/>
+                                <field name="ytd_nis"/>
+                                <field name="ytd_nht"/>
+                                <field name="ytd_edt"/>
+                                <field name="ytd_paye"/>
+                            </group>
+                        </group>
+                    </page>
+            </xpath>
+        </field>
+</record>
+
+
+
+
+</odoo>

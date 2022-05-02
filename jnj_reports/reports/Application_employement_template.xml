@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="application_employement_template">
+        <t t-call="web.basic_layout">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="padding-right: 5%; padding-left: 5%;">
+                        <table>
+                            <tr>
+                                <td colspan='3' style="width:300px; text-align: center; padding-left: 15%;">
+                                    <u style="font-size: 25px">
+                                        J and J United Limited
+                                    </u>
+                                </td>
+                                <td style="width:20px;  height: 2%; text-align: right;">
+                                    <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"
+                                         width="130px" height="130px" alt="Logo"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='4' style="width:3000px; text-align: center;">
+                                    <u style="font-size: 25px">
+                                        APPLICATION FOR EMPLOYMENT
+                                    </u>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td colspan="2" style="font-size: 23px;">
+                                    <u>
+                                        <b>Personal Information</b>
+                                    </u>
+                                </td>
+                                <td colspan="2" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding-right: 5px;text-align:right;">
+                                    <b>
+                                        <span>
+                                            <img t-if="doc.image_1920" t-att-src="image_data_uri(doc.image_1920)"
+                                                 width="50%" height="100%" alt="Photo"/>
+                                        </span>
+                                    </b>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+                                    <b>Name:</b>
+                                    <span t-esc="doc.name"/>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+                                    <b>Date of Birth:</b>
+                                    <t t-if="doc.birthday">
+                                        <span t-esc="doc.birthday.strftime('%d-%b-%Y')"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+                                    <b>Address:</b>
+                                    <span t-esc="doc.address_home_id.name"/>,<span
+                                        t-esc="doc.address_home_id.state_id.name"/>,<span
+                                        t-esc="doc.address_home_id.street"/>,<span
+                                        t-esc="doc.address_home_id.country_id.name"/>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;border: 1px solid black;">
+                                    <b>Phone:</b>
+                                    <span t-esc="doc.phone"/>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;border: 1px solid black;">
+                                    <b>Mobile 1:</b>
+                                    <span t-esc="doc.mobile_1"/>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;border: 1px solid black;">
+                                    <b>Mobile 2:</b>
+                                    <span t-esc="doc.mobile_2"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;border: 1px solid black;">
+                                    <b>TRN No:</b>
+                                    <span t-esc="doc.trn_number"/>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;border: 1px solid black;">
+                                    <b>NIS No:</b>
+                                    <span t-esc="doc.nis_number"/>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;border: 1px solid black;">
+                                    <b>Gender:</b>
+                                    <span t-esc="doc.gender"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;border: 1px solid black;">
+                                    <b>Place of Birth:</b>
+                                    <span t-esc="doc.place_of_birth"/>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;border: 1px solid black;">
+                                    <b>ID No:</b>
+                                    <t t-esc="doc.identification_id"/>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;border: 1px solid black;">
+                                    <span>
+                                        <b>ID Type:</b>
+                                        <t t-esc="doc.id_type"/>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <td colspan='4' style="width:3000px; text-align: center;">
+                                    <b>Please Attach Photocopy of your TRN, NIS and Identification Card</b>
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td style="font-size: 23px;">
+                                    <u>
+                                        <b>Qualification</b>
+                                    </u>
+                                </td>
+                            </tr>
+                            <tr style="background-color:#dedede">
+                                <td style="width: 300px; height: 5%; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Type of School</b>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Name of The School</b>
+                                </td>
+                                <td style="width: 200px; height: 5%; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Diploma or Degree</b>
+                                    <b>Received/Expected</b>
+                                </td>
+                                <td style="width: 200px; height: 5%; valign: center; font-size: 18px; text_align: center;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Years Completed</b>
+                                </td>
+                            </tr>
+                            <t t-foreach="doc.employee_qualification" t-as="line">
+                                <tr>
+                                    <td style="width: 300px; valign: center; text-align: center; font-size: 18px;
+                                        padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                        <t t-esc="line.institute_type"/>
+                                        <br/>
+                                    </td>
+                                    <td style="width: 300px; valign: center; text-align: center; font-size: 18px;
+                                        padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                        <t t-esc="line.institute_name"/>
+                                    </td>
+                                    <td style="width: 200px; valign: center; text-align: center; font-size: 18px;
+                                        padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                        <t t-if="line.degree_received">
+                                            <t t-esc="line.degree_received"/>
+                                        </t>
+                                    </td>
+                                    <td style="width: 200px; height: 5%; valign: center; text_align: center; font-size: 18px;
+                                        padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                        <t t-esc="line.years_completed_of_course"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <td colspan="3" style="font-size: 23px;">
+                                    <u>
+                                        <b>Work Experience</b>
+                                    </u>
+                                </td>
+                            </tr>
+
+                            <tr style="background-color:#dedede">
+                                <td style="width: 300px; height: 5%; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Date:Month and Year</b>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Name of Employer</b>
+                                </td>
+                                <td style="width: 200px; height: 5%; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Salary</b>
+                                </td>
+                                <td style="width: 200px; height: 5%; valign: center; text-align: center; font-size: 18px; text_align: center;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Position</b>
+                                </td>
+                                <td style="width: 200px; height: 5%; valign: center; text-align: center; font-size: 18px; text_align: center;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Reason for Leaving</b>
+                                </td>
+                            </tr>
+                            <t t-foreach="doc.emp_history" t-as="line">
+                                <tr>
+                                    <td style="width: 300px; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                        <b>From:</b>
+                                        <t t-if="line.join_date_1">
+                                            <t t-esc="line.join_date_1.strftime('%d-%b-%Y')"/>
+                                        </t>
+                                        <b>To:</b>
+                                        <t t-if="line.resign_date_1">
+                                            <t t-esc="line.resign_date_1.strftime('%d-%b-%Y')"/>
+                                        </t>
+                                    </td>
+                                    <td style="width: 300px; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                        <t t-esc="line.employer_name_1"/>
+                                    </td>
+                                    <td style="width: 200px; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                        <t t-esc="line.salary_1"/>
+                                    </td>
+                                    <td style="width: 200px; height: 5%; valign: center; text-align: center; font-size: 18px; text_align: center;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                        <t t-esc="line.job_position_1"/>
+                                    </td>
+                                    <td style="width: 200px; height: 5%; valign: center; text-align: center; font-size: 18px; text_align: center;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                        <t t-esc="line.reason_for_resign_1"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+
+                        <table>
+                            <t t-if="doc.father_name">
+                                <tr>
+                                    <td colspan="3" style="font-size: 23px;">
+                                        <br/>
+                                        <u>
+                                            <b>Family Information</b>
+                                        </u>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Father Name:</b>
+                                        <span t-esc="doc.father_name"/>
+                                    </td>
+                                    <td colspan="2" style="width: 200px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Date of Birth:</b>
+                                        <t t-if="doc.dob_father">
+                                            <span t-esc="doc.dob_father.strftime('%d-%b-%Y')"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="width: 1000px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Address:</b>
+                                        <span t-esc="doc.father_address"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Father Occupation:</b>
+                                        <span t-esc="doc.father_occupation"/>
+                                    </td>
+                                    <td colspan="2" style="width: 200px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Contact No:</b>
+                                        <span t-esc="doc.father_phone"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Mother Name:</b>
+                                        <span t-esc="doc.mother_name"/>
+                                    </td>
+                                    <td colspan="2" style="width: 200px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Date of Birth:</b>
+                                        <t t-if="doc.dob_mother">
+                                            <span t-esc="doc.dob_mother.strftime('%d-%b-%Y')"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="width: 1000px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Address:</b>
+                                        <span t-esc="doc.mother_address"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Mother Occupation:</b>
+                                        <span t-esc="doc.mother_occupation"/>
+                                    </td>
+                                    <td colspan="2" style="width: 200px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Contact No:</b>
+                                        <span t-esc="doc.mother_phone"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Spouse Name:</b>
+                                        <span t-esc="doc.spouse_name"/>
+                                    </td>
+                                    <td colspan="2" style="width: 200px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Date of Birth:</b>
+                                        <t t-if="doc.dob_spouse">
+                                            <span t-esc="doc.dob_spouse.strftime('%d-%b-%Y')"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" style="width: 1000px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Address:</b>
+                                        <span t-esc="doc.spouse_address"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Spouse Occupation:</b>
+                                        <span t-esc="doc.spouse_occupation"/>
+                                    </td>
+                                    <td colspan="2" style="width: 200px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black;">
+                                        <b>Contact No:</b>
+                                        <span t-esc="doc.spouse_phone"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <td colspan="5" style="font-size: 13px;">
+                                    <br/>
+                                    <b>List Names of 3 Persons (Excluding relatives) We May Contact Who Have Knowledge
+                                        of Your Job-Related Skills.
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 23px;">
+                                    <u>
+                                        <b>References</b>
+                                    </u>
+                                </td>
+
+                            </tr>
+
+                            <tr style="background-color:#dedede">
+                                <td style="width: 300px; height: 5%; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Name</b>
+                                </td>
+                                <td style="width: 300px; height: 5%; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Relationship</b>
+                                </td>
+                                <td style="width: 200px; height: 5%; valign: center; text-align: center; font-size: 18px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Telephone Number</b>
+                                </td>
+                                <td style="width: 200px; height: 5%; valign: center; text-align: center; font-size: 18px; text_align: center;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Address</b>
+                                </td>
+                                <td style="width: 200px; height: 5%; valign: center; text-align: center; font-size: 18px; text_align: center;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <b>Occupation</b>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width: 300px; valign: center; text-align: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_name_1"/>
+                                </td>
+                                <td style="width: 300px; valign: center; text-align: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.relationship_ref_1"/>
+                                </td>
+                                <td style="width: 200px; valign: center; text-align: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_phone_1"/>
+                                </td>
+                                <td style="width: 200px; valign: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_address_1"/>
+                                </td>
+                                <td style="width: 200px; valign: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_occupation_1"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; valign: center; text-align: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_name_2"/>
+                                </td>
+                                <td style="width: 300px; valign: center; text-align: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.relationship_ref_2"/>
+                                </td>
+                                <td style="width: 200px; valign: center; text-align: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_phone_2"/>
+                                </td>
+                                <td style="width: 200px; valign: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_address_2"/>
+                                </td>
+                                <td style="width: 200px; valign: center; font-size: 16px; text_align: center;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_occupation_2"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px; valign: center; text-align: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_name_3"/>
+                                </td>
+                                <td style="width: 300px; valign: center; text-align: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.relationship_ref_3"/>
+                                </td>
+                                <td style="width: 200px; valign: center; text-align: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_phone_3"/>
+                                </td>
+                                <td style="width: 200px; height: 5%; valign: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_address_3"/>
+                                </td>
+                                <td style="width: 200px; valign: center; font-size: 16px;
+                                padding: 5px; border: 1px solid black; border-collapse: collapse;">
+                                    <t t-esc="doc.ref_occupation_3"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5">
+                                    <br/>
+
+                                    <p>
+                                        I certify that all information on this application is true and correct.
+                                        <b>
+                                            <input type="checkbox"/>
+
+                                        </b>
+                                    </p>
+                                    <p>
+                                        If I am caught stealing, I agree to pay four times the value of the goods as a
+                                        penalty.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5">
+                                    <p>
+                                        In the first instance you will be on probation for a period of six months from
+                                        the date of your joining. Whereafter the probation period may be either extended
+                                        at the discretion of the management or may be dispensed with either earlier or
+                                        on completion or thereafter till confirmation. Unless confirmed in writing, you
+                                        will be deemed as probationer after the expiry of the initial or extended period
+                                        of probation.
+                                        Your services are liable to be terminated without any notice or wages in lieu
+                                        thereof during the initial or extended period of probation.
+                                    </p>
+                                    <br/>
+
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+                                    <b>Applicant Signature ___________</b>
+                                </td>
+                                <td colspan="2" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+                                    <b>Date :</b>
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%b-%Y')"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+                                    <b>Position:</b>
+                                    <span t-esc="doc.job_id.name"/>
+                                </td>
+                                <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+                                    <b>Department:</b>
+                                    <span t-esc="doc.department_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+                                    <b>Date of Applicant Start Work:</b>
+                                    <t t-if="doc.employee_joining_date">
+                                        <span t-esc="doc.employee_joining_date.strftime('%d-%b-%Y')"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+
+                                    <b>Manager's Signature ___________</b>
+                                </td>
+                                <td colspan="2" style="width: 300px; height: 5%; valign: center; font-size: 18px;
+                                padding: 5px;">
+
+                                    <b>Stamp ___________</b>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

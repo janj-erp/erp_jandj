@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_employee_hr_page" model="ir.ui.view">
+        <field name="name">employee.hr.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group[1]"
+                   position="after">
+                <group col="3">
+                <group string="Father Details">
+                    <field name="father_name" placeholder="Name"/>
+                    <field name="dob_father" placeholder="DOB"/>
+                    <field name="father_address" placeholder="Father Address"/>
+                    <field name="father_occupation" placeholder="Father Occupation"/>
+                    <field name="father_phone" placeholder="Father Phone No"/>
+                </group>
+
+                <group string="Mother Details">
+                    <field name="mother_name" placeholder="Name"/>
+                    <field name="dob_mother" placeholder="DOB"/>
+                    <field name="mother_address" placeholder="Mother Address"/>
+                    <field name="mother_occupation" placeholder="Mother Occupation"/>
+                    <field name="mother_phone" placeholder="Mother Phone No"/>
+                </group>
+
+                <group string="Spouse Details">
+                    <field name="spouse_name" placeholder="Name"/>
+                    <field name="dob_spouse" placeholder="DOB"/>
+                    <field name="spouse_address" placeholder="Spouse Address"/>
+                    <field name="spouse_occupation" placeholder="Spouse Occupation"/>
+                    <field name="spouse_phone" placeholder="Spouse Phone No"/>
+                </group>
+                </group>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group[2]" position="after">
+                <group>
+                    <field name="id_type"/>
+                    <field name="mobile_1"/>
+                    <field name="mobile_2"/>
+                </group>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='hr_settings']/group/group[4]"
+                   position="after">
+                <group string="Hired Details">
+                    <field name="employee_joining_date"/>
+                </group>
+                <group string="Layoff Details">
+                    <field name="layoff_start_date"/>
+                    <field name="layoff_end_date"/>
+                    <field name="layoff_reason"/>
+                    <field name="store"/>
+                </group>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='hr_settings']/group/group[@name='identification_group']"
+                   position="before">
+                <group string="Suspension Details">
+                    <field name="suspension_start_date"/>
+                    <field name="suspension_end_date"/>
+                    <field name="suspension_reason"/>
+                    <field name="suspension_period"/>
+                </group>
+                <group name="termination" string="Termination Details">
+                    <field name="notice_week_pay_duration"/>
+                    <field name="employement_duration"/>
+                </group>
+            </xpath>
+            <xpath expr="//form/header" position="inside">
+                <button name="%(jnj_reports.action_lay_off)d" string="Lay Off" type="action"/>
+            </xpath>
+            <xpath expr="//form/header/button[@name='%(hr.plan_wizard_action)d']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

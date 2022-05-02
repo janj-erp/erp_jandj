@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="CreateRequest" t-inherit="point_of_sale.ProductInfoPopup" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='section-product-info-title']" position="before">
+<!--            <div class="row" style="cursor: pointer;" t-on-click="open_req()">-->
+                <button t-on-click="open_req(0)">
+                    <h2><i role="img" aria-label="Request" title="Request" class="fa fa-barcode"
+                        /> Request</h2>
+                </button>
+
+                <button t-on-click="open_req(1)">
+                    <h2><i role="img" aria-label="Quantity" title="Quantity" class="fa fa-plus"
+                        /> Add Quantity</h2>
+                </button>
+<!--            </div>-->
+                <br/><br/>
+        </xpath>
+    </t>
+</templates>
