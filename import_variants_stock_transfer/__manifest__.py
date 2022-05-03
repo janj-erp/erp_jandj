@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
 	'name': 'Import Products from Excel / Product packages',
-	'version': '15.0.0.0',
+	'version': '15.1',
 	'category': 'Inventory',
 	'summary': 'This apps helps to import products, variants and stock using CSV or Excel file',
 	'description': '''Using this module, stock transfers are imported using excel sheets
@@ -13,7 +13,8 @@
 		'security/ir.model.access.csv',
 		'wizard/view_import_chart.xml',
 		'views/pack_view.xml',
-		'views/create_pack_action.xml'
+		'views/create_pack_action.xml',
+		'views/product_views.xml',
 		],
 	'auto_install': False,
 	'installable': True,

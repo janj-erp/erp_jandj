@@ -28,14 +28,14 @@ odoo.define('pos_category_mgmt.db', function (require) {
                     }
                     this.category_search_string[categ_id] += search_string;
 
-                    var ancestors = [];
+                    var ancestors = this.get_category_ancestors_ids(categ_id) || [];
 
                     for(var j = 0, jlen = ancestors.length; j < jlen; j++){
                         var ancestor = ancestors[j];
-                        if(! stored_categories[ancestor]){
-                            stored_categories[ancestor] = [];
-                        }
-                        stored_categories[ancestor].push(product.id);
+//                        if(! stored_categories[ancestor]){
+//                            stored_categories[ancestor] = [];
+//                        }
+//                        stored_categories[ancestor].push(product.id);
 
                         if( this.category_search_string[ancestor] === undefined){
                             this.category_search_string[ancestor] = '';

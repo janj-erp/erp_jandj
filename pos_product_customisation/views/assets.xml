@@ -51,6 +51,16 @@
         </record>
         <menuitem id="all_picking_requests" name="POS Transfer Requests" parent="stock.menu_stock_warehouse_mgmt" sequence="2" action="action_picking_tree_requests" groups="stock.group_stock_manager,stock.group_stock_user"/>
 
+        <record id="create_pack_action" model="ir.actions.server">
+            <field name="name">Update Item code on all variants</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="binding_model_id" ref="product.model_product_template"/>
+<!--            <field name="binding_view_types">list</field>-->
+            <field name="state">code</field>
+            <field name="code">
+                records.update_all_variant_codes()
+            </field>
+        </record>
 <!--        <record id="action_picking_tree_reserves" model="ir.actions.act_window">-->
 <!--            <field name="name">POS Stock Reserves</field>-->
 <!--            <field name="res_model">stock.picking</field>-->

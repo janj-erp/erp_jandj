@@ -18,21 +18,30 @@
         <field name="arch" type="xml">
             <form string="Pack">
                 <sheet>
-                    <div class="oe_title">
-                        <div class="oe_edit_only">
-                            <label for="name" string="Package Ref"/>
-                        </div>
-                        <h1>
-                            <field name="name"/>
-                        </h1>
-                    </div>
                     <group>
-                        <field name="pack_lines">
-                            <tree editable="bottom">
-                                <field name="name"/>
-                                <field name="quantity"/>
-                            </tree>
-                        </field>
+                        <group colspan="2">
+                            <div class="oe_title">
+                                <div class="oe_edit_only">
+                                    <label for="name" string="Package Ref"/>
+                                </div>
+                                <h1>
+                                    <field name="name"/>
+                                </h1>
+                            </div>
+                            <div style="text-align: right; max-height: 150px; max-width: 150px">
+                                <field name="image_variant_1920" widget="image"/>
+                            </div>
+                        </group>
+                        <group colspan="2">
+                            <field name="pack_lines" widget="one2many" nolabel="1">
+                                <tree string="Products" editable="bottom" mode="tree">
+                                    <field name="product_image" widget="image"/>
+                                    <field name="name" widget="many2one"/>
+                                    <field name="quantity"/>
+<!--                                    <field name="product_template_id" widget="many2one"/>-->
+                                </tree>
+                            </field>
+                        </group>
                     </group>
                  </sheet>
              </form>
@@ -70,7 +79,8 @@
                     <group>
                         <field name="pack_ids" attrs="{'readonly': [('state', 'not in', ['draft'])]}">
                             <tree editable="bottom">
-                                <field name="name"/>
+                                <field name="pack_image" widget="image"/>
+                                <field name="name" widget="many2one"/>
                                 <field name="quantity"/>
                             </tree>
                         </field>

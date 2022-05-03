@@ -1,4 +1,5 @@
 from odoo import models, fields
+from odoo.exceptions import ValidationError
 
 
 class PickingPackLine(models.Model):
@@ -6,6 +7,7 @@ class PickingPackLine(models.Model):
     _description = 'Packages lines in stock pickings'
 
     name = fields.Many2one('product.pack', 'Package Name')
+    pack_image = fields.Image('Pack Image', related='name.image_variant_1920')
     quantity = fields.Integer('Quantity')
     picking_id = fields.Many2one('stock.picking', 'Picking ID')
 
@@ -16,8 +18,11 @@ class StockPicking(models.Model):
     pack_ids = fields.One2many('picking.pack.line', 'picking_id', 'Select Packages')
 
     def update_moves(self):
-        print('update_moves')
-        products = list()
+        # print('update_moves')
+        # products = list()
+        for pack in self.pack_ids:
+            if not pack.name:
+                raise ValidationError('Please remove the empty pack lines before updating products')
         for move in self.move_ids_without_package:
             if move.from_package:
                 move.unlink()
@@ -27,7 +32,7 @@ class StockPicking(models.Model):
                 qty = line.quantity * pack.quantity
                 self.move_ids_without_package += self.env['stock.move'].create({
                     'name': 'Package Moves',
-                    'from_package': 1,
+                    'from_package': True,
                     'product_uom': product.uom_id.id,
                     'product_id': product.id,
                     'product_uom_qty': qty,

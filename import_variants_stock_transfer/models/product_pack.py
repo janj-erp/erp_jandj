@@ -6,6 +6,7 @@ class ProductPack(models.Model):
     _description = 'Model to group products into a pack and use them for internal transfer'
 
     name = fields.Char('Pack Name')
+    image_variant_1920 = fields.Image("Variant Image", max_width=256, max_height=256)
     pack_lines = fields.One2many('product.pack.line', 'pack_id', string='Pack Lines')
 
 
@@ -14,7 +15,9 @@ class ProductPackLine(models.Model):
     _description = 'List of product and their quantities in a pack'
 
     name = fields.Many2one('product.product', 'Product', required=True)
+    product_image = fields.Image('Line Image', related='name.image_128')
     quantity = fields.Integer('Nos')
+    # product_template_id = fields.Many2one('product.template', 'Product Template')
     pack_id = fields.Many2one('product.pack', string='Pack ID')
 
 

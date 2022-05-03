@@ -2,7 +2,7 @@
     "name": """POS Category Management""",
     "summary": """Shows the product for only selected category""",
     "category": "Point of Sale",
-    "version": "15.0.0.0",
+    "version": "15.1",
     "application": False,
     "author": "Prime Minds Consulting Services",
     "website": "http://primeminds.co",
