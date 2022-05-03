@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="product.product_product_tree_view"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='default_code']" position="before">
-                <field name="image_1920" widget="image" options="{'preview_image': 'image_128'}"/>
+                <field name="image_128" widget="image" options="{'preview_image': 'image_128'}"/>
             </xpath>
         </field>
     </record>
