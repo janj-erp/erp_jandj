@@ -6,7 +6,7 @@
 	'summary': 'This apps helps to import products, variants and stock using CSV or Excel file',
 	'description': '''Using this module, stock transfers are imported using excel sheets
 	''',
-	'author': 'CJ',
+	'author': 'CJ Rohan, Prime Minds Consulting Private Limited',
 	'website': 'https://www.primeminds.co',
 	'depends': ['base', 'account', 'stock', 'pos_product_customisation'],
 	'data': [

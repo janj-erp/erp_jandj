@@ -6,7 +6,8 @@
     'category': 'Point of Sale',
     'summary': '''1. Request Products from POS Interface \n
                   2. Update Product's quantity from POS Interface''',
-    'website': 'https://www.odoo.com',
+    'website': 'https://www.primeminds.co',
+    'author': 'CJ Rohan, Prime Minds Consulting Private Limited',
     'depends': ['base', 'point_of_sale', 'stock', 'product'],
     'data': [
         'security/ir.model.access.csv',
