@@ -5,7 +5,7 @@ from datetime import datetime
 class Employee(models.Model):
     _inherit = 'hr.employee'
 
-    father_name = fields.Char(string="Father Name", required=True)
+    father_name = fields.Char(string="Father Name", required=False)
     father_address = fields.Char(string="Father Address")
     dob_father = fields.Date(string="Father Date Of Birth")
     father_occupation = fields.Char(string="Father Occupation")
