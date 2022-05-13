@@ -9,6 +9,7 @@
     'website': 'https://www.primeminds.co',
     'author': 'CJ Rohan, Prime Minds Consulting Private Limited',
     'depends': ['base', 'point_of_sale', 'stock', 'product'],
+    'sequence': 50,
     'data': [
         'security/ir.model.access.csv',
         'views/assets.xml',
