@@ -15,7 +15,23 @@ class ProductTemplate(models.Model):
     default_code = fields.Char(
         'Item Code', compute='_compute_default_code',
         inverse='_set_default_code', store=True, required=True)
+    available_in_pos = fields.Boolean(string='Available in POS',
+                                      help='Check if you want this product to appear in the Point of Sale.',
+                                      default=True)
 
+    def _set_barcode(self):
+        if len(self.product_variant_ids) == 1:
+            self.product_variant_ids.barcode = self.barcode
+        if len(self.product_variant_ids) > 1:
+            for variant in self.product_variant_ids:
+                variant.barcode = self.barcode
+
+    @api.depends('product_variant_ids.barcode')
+    def _compute_barcode(self):
+        self.barcode = False
+        for template in self:
+            if len(template.product_variant_ids) >= 1:
+                template.barcode = template.product_variant_ids[0].barcode
 
     @api.constrains('default_code')
     def sync_default_code(self):
@@ -34,11 +50,20 @@ class ProductTemplate(models.Model):
             product.product_variant_ids.default_code = code
             product.default_code = code
 
+    @api.constrains('list_price')
+    def list_price_validation(self):
+        if self.list_price < 10:
+            raise ValidationError('Please enter a valid sales price')
 
-class ProductTemplate(models.Model):
+
+class Product(models.Model):
     _inherit = 'product.product'
 
     default_code = fields.Char('Item Code', index=False, required=True)
+
+    _sql_constraints = [
+        ('barcode_uniq', 'CHECK(1=1)', 'A barcode can only be assigned to one product !'),
+    ]
 
     @api.onchange('default_code')
     def _onchange_default_code(self):

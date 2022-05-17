@@ -28,20 +28,20 @@ from odoo import api, models
 class ProductAutoBarcode(models.Model):
     _inherit = 'product.product'
 
-    @api.model
-    def create(self, vals):
-        res = super(ProductAutoBarcode, self).create(vals)
-        barcode_id = res.id
-        barcode_search = False
-        while not barcode_search:
-            ean = generate_ean(str(barcode_id))
-            if self.env['product.product'].search([('barcode', '=', ean)]):
-                barcode_search = False
-                barcode_id += 1
-            else:
-                barcode_search = True
-        res.barcode = ean
-        return res
+    # @api.model
+    # def create(self, vals):
+    #     res = super(ProductAutoBarcode, self).create(vals)
+    #     barcode_id = res.id
+    #     barcode_search = False
+    #     while not barcode_search:
+    #         ean = generate_ean(str(barcode_id))
+    #         if self.env['product.product'].search([('barcode', '=', ean)]):
+    #             barcode_search = False
+    #             barcode_id += 1
+    #         else:
+    #             barcode_search = True
+    #     res.barcode = ean
+    #     return res
 
 
 def ean_checksum(eancode):
@@ -95,20 +95,40 @@ def generate_ean(ean):
 class ProductTemplateAutoBarcode(models.Model):
     _inherit = 'product.template'
 
-    @api.model
-    def create(self, vals_list):
-        templates = super(ProductTemplateAutoBarcode, self).create(vals_list)
-        barcode_id = templates.id
-        barcode_search = False
-        while not barcode_search:
-            ean = generate_ean(str(barcode_id))
-            if self.env['product.product'].search([('barcode', '=', ean)]):
+    # @api.model
+    # def create(self, vals_list):
+    #     templates = super(ProductTemplateAutoBarcode, self).create(vals_list)
+    #     barcode_id = templates.id
+    #     barcode_search = False
+    #     while not barcode_search:
+    #         ean = generate_ean(str(barcode_id))
+    #         if self.env['product.product'].search([('barcode', '=', ean)]):
+    #             barcode_search = False
+    #             barcode_id += 1
+    #         else:
+    #             barcode_search = True
+    #     templates.barcode = ean
+    #     return templates
+
+    def generate_barcodes(self):
+        for res in self:
+            if not res.barcode:
+                barcode_id = res.id
                 barcode_search = False
-                barcode_id += 1
-            else:
-                barcode_search = True
-        templates.barcode = ean
-        return templates
+                while not barcode_search:
+                    ean = generate_ean(str(barcode_id))
+                    if self.env['product.template'].search([('barcode', '=', ean)]):
+                        barcode_search = False
+                        barcode_id += 1
+                    else:
+                        barcode_search = True
+                res.barcode = ean
+
+    def update_barcode_on_variants(self):
+        for rec in self:
+            rec.product_variant_ids.barcode = rec.barcode
+
+
 
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
