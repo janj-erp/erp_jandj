@@ -35,6 +35,8 @@ class ProductTemplate(models.Model):
 
     @api.constrains('default_code')
     def sync_default_code(self):
+        if not self.default_code:
+            self.default_code = self.product_variant_ids[0].default_code 
         for rec in self.product_variant_ids:
             if not rec.default_code:
                 rec.default_code = self.default_code
