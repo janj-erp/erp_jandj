@@ -35,7 +35,7 @@ class Payslip(models.Model):
 
     # working & leave days
     total_days = fields.Float("Total Days", compute="get_total_number_of_days")
-    leave_type = fields.Many2one('hr.leave.type')
+    leave_type = fields.Many2one('hr.leave.type', string="Leave Type")
     unpaid_days = fields.Float('Loss Of Pay (Days)',compute="get_total_unpaid_of_days")
     total_sundays = fields.Integer('Total Sundays')
 
