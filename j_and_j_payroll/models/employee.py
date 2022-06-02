@@ -227,7 +227,8 @@ class Payslip(models.Model):
         return words
 
     def get_branch_name(self):
-        datas = self.env['pos.config'].search([('salesperson_ids','in',self.employee_id.id)])
-        for data in datas:
-            branch_name = data.picking_type_id.warehouse_id.name
-        return branch_name
+#         datas = self.env['pos.config'].search([('salesperson_ids','in',self.employee_id.id)])
+#         branch_name = False
+#         for data in datas:
+#             branch_name = data.picking_type_id.warehouse_id.name
+        return self.employee_id.work_location_id.name
