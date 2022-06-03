@@ -15,7 +15,7 @@
         <field name="dpi">90</field>
     </record>
 
-    <record id="report_payslip_menu" model="ir.actions.report">
+    <record id="report_payslip_menu01" model="ir.actions.report">
         <field name="name">Payslip</field>
         <field name="model">hr.payslip</field>
         <field name="report_type">qweb-pdf</field>
