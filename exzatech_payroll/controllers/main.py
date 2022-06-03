@@ -23,7 +23,7 @@ class HrPayroll(Controller):
             #     report = request.env.ref('exzatech_payroll.report_payslip_menu', False)
             # else:
             #     report = payslip.struct_id.report_id
-            report = request.env.ref('exzatech_payroll.report_payslip_menu', False)
+            report = request.env.ref('exzatech_payroll.report_payslip_menu01', False)
             # print("@@@@@@@@@@@@@@@", report)
             report = report.with_context(lang=payslip.employee_id.sudo().address_home_id.lang)
             pdf_content, _ = report.sudo()._render_qweb_pdf(payslip.id, data={'company_id': payslip.company_id})
