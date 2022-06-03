@@ -14,7 +14,7 @@
     <record id="users_employee_rules" model="ir.rule">
         <field name="name"> </field>
         <field ref="hr.model_hr_employee" name="model_id"/>
-        <field name="domain_force">[('work_location_id','=',user.hr_work_location_id.id)]</field>
+        <field name="domain_force">['|', ('work_location_id','=',user.hr_work_location_id.id), ('work_location_id','=',False)]</field>
         <field name="perm_read" eval="1"/>
         <field name="perm_write" eval="1"/>
         <field name="perm_create" eval="1"/>
