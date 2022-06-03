@@ -83,5 +83,5 @@ class Timeoff(http.Controller):
 
         kw.update(kw_add)
         leave = request.env['hr.leave'].with_user(user.id).create(kw)
-        leave._compute_number_of_days()
+        leave.number_of_days += 1
         return http.request.render('timeoff_custom.timeoff_created')
