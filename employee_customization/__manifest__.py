@@ -1,6 +1,6 @@
 {
     'name': 'Employee Customization',
-    'version': '15.0.0.0',
+    'version': '15.1',
     'summary': 'Enhancement has been done in various models, created new models, fields and edited the flow of models',
     'author': 'Murali GM',
     'created_on': '18 May',
@@ -8,7 +8,7 @@
     'sequence': 1,
     'description': """Enhancement has been done in various models, created new models, fields and edited the flow of models""",
     'category': 'Tools',
-    'depends': ['sale', 'mail', 'crm', 'contacts', 'hr', 'account', 'purchase', 'stock', 'calendar', 'account_edi', 'product', 'base',  'mrp', 'web', 'website_crm_partner_assign'],
+    'depends': ['hr', 'base'],
     'data': [
         'views/res_users.xml',
         'views/hr_employee.xml',
