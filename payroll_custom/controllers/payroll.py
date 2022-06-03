@@ -84,7 +84,7 @@ class Payslips(http.Controller):
             payslip = request.env['hr.payslip'].sudo().search([('id', '=', int(kw.get('slip_id')))])
             ps = payslip.action_print_payslip()
 
-            pdf, _ = request.env.ref('hr_payroll.action_report_payslip').with_user(2)._render_qweb_pdf([payslip.id])
+            pdf, _ = request.env.ref('j_and_j_payroll.report_payslip_menu').with_user(2)._render_qweb_pdf([payslip.id])
             pdf_http_headers = [('Content-Type', 'application/pdf'), ('Content-Length', len(pdf)),
                                 ('Content-Disposition', content_disposition('%s - payslip.pdf' % (payslip.name)))]
             return request.make_response(pdf, headers=pdf_http_headers)
