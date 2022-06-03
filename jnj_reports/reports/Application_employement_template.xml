@@ -38,7 +38,7 @@
                                     <b>
                                         <span>
                                             <img t-if="doc.image_1920" t-att-src="image_data_uri(doc.image_1920)"
-                                                 width="50%" height="100%" alt="Photo"/>
+                                                  alt="Photo" style="width: 150px;"/>
                                         </span>
                                     </b>
                                 </td>

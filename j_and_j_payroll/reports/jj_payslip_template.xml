@@ -8,7 +8,7 @@
                     <t t-foreach="docs" t-as="doc">
                         <table>
                             <tr>
-                                <td colspan="3"  style="width: 1000px; padding-left: 10px;text-align: left;" >
+                                <td colspan="3"  style="width: 1000px; padding-left: 10px;text-align: left;  padding-top: 10px;" >
                                     <span>
                                         <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"
                                          width="5%" height="3%" alt="Logo"/>
@@ -95,7 +95,7 @@
                                 <td style="width: 200px; vertical-align: top; text-align: center; font-size: 15px;border: 1px solid black;">
                                     <t t-if="'Weekly' in doc.struct_id.name">
                                         <t t-esc="40.0"/><br/>
-                                        <t t-esc="doc.total_hours"/>
+                                        <t t-esc="round(doc.total_hours,2)"/>
                                     </t>
                                     <t t-if="'Monthly' in doc.struct_id.name">
                                         <t t-esc="doc.total_days"/><br/>
@@ -114,7 +114,7 @@
                                 <td style="width: 205px; vertical-align: top; text-align: center; font-size: 15px;border: 1px solid black;">
                                     <t t-if="'Weekly' in doc.struct_id.name">
                                         <t t-if="doc.total_hours &gt; 40">
-                                            <t t-esc="doc.total_hours - 40 "/><br/>
+                                            <t t-esc="round(doc.total_hours - 40,2)"/><br/>
                                         </t>
                                         <t t-if="doc.total_hours &lt; 40">
                                             <t t-esc="0.0"/><br/>

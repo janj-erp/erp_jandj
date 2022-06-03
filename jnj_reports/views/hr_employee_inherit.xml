@@ -49,7 +49,6 @@
                     <field name="layoff_start_date"/>
                     <field name="layoff_end_date"/>
                     <field name="layoff_reason"/>
-                    <field name="store"/>
                 </group>
             </xpath>
             <xpath expr="//form/sheet/notebook/page[@name='hr_settings']/group/group[@name='identification_group']"

@@ -36,7 +36,7 @@ class Employee(models.Model):
     emp_history = fields.One2many('employee.experience', 'emp_history')
     employee_qualification = fields.One2many('employee.qualification', 'employee_qualification')
     emp_terminate = fields.One2many('employee.termination', 'emp_terminate')
-    store = fields.Char('Store Name', compute='_store_name')
+    store = fields.Char('Store Name') #, compute='_store_name')
     ref_name_1 = fields.Char()
     ref_address_1 = fields.Char()
     relationship_ref_1 = fields.Char()
@@ -52,14 +52,15 @@ class Employee(models.Model):
     relationship_ref_3 = fields.Char()
     ref_occupation_3 = fields.Char()
     ref_phone_3 = fields.Char()
-    trn_no = fields.Char()
+    trn_no = fields.Char(   )
     nis_no = fields.Char()
     employee_salary = fields.Float()
 
-    def _store_name(self):
-        res = self.env['pos.config'].search([('salesperson_ids', '=', self.id)])
-        vals = res.picking_type_id.warehouse_id.name
-        self.store = vals
+    # def _store_name(self):
+        # res = self.env['pos.config'].search([('salesperson_ids', '=', self.id)])
+        # vals = res.picking_type_id.warehouse_id.name
+        # self.store = self.work_location_id.name
+        # print(self.store)
 
     def _hired_date(self):
         res = self.env['hr.contract.history'].search([('employee_id', '=', self.id)])

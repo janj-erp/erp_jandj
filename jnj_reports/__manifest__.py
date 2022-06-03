@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "J & J Reports",
-    'version': '15.0.0.6',
+    'version': '15.0.0.7',
     'summary': """This module creates employee related report in employee module""",
     'sequence': 4,
     'description': """This module creates employee related report in employee module""",

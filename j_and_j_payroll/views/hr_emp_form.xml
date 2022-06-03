@@ -21,6 +21,9 @@
         <field name="model">hr.payslip</field>
         <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
         <field name="arch" type="xml">
+             <xpath expr="//notebook/page[@name='worked_days_input']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
             <xpath expr="//notebook/page[@name='account_info']" position="inside">
                 <group>
                    <group string="Deductions">

@@ -9,7 +9,7 @@
                             <tr>
                                 <td style="width:4000px; text-align:center;">
                                     <u style="font-size:25px">
-                                        <t t-esc="doc.store"/>
+                                        <t t-esc="doc.work_location_id.name"/>
                                     </u>
                                 </td>
                                 <td style="width:100px;  height: 2%; text-align: right;">
