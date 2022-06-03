@@ -47,7 +47,7 @@
               </thead>
               <t t-foreach="time_offs" t-as="timeoff">
                   <tr>
-                      <td><t t-esc="timeoff.name"/></td>
+                      <td><t t-esc="timeoff.holiday_status_id.display_name"/></td>
                       <td><t t-esc="timeoff.request_date_from"/></td>
                       <td><t t-esc="timeoff.request_date_to"/></td>
                       <td><t t-esc="timeoff.number_of_days"/></td>
