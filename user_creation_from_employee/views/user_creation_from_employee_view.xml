@@ -9,7 +9,7 @@
                 <xpath expr="//field[@name='company_id']" position="after">
                     <field name="is_created" invisible="1"/>
                     <field name="related_user" string="Portal User" attrs="{'invisible': [('user_id', '!=', False)]}"/>
-                    <field name="user_id" attrs="{'invisible': [('related_user', '!=', False)]}" />
+                    <field name="user_id" string="Internal User" attrs="{'invisible': [('related_user', '!=', False)]}" />
                 </xpath>
                 <xpath expr="//form/sheet" position="before">
                     <header>
