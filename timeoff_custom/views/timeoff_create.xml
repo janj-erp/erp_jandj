@@ -136,32 +136,6 @@
         </field>
     </record>
 
-    <record id="timeoff_invalid" model="website.page">
-        <field name="name">Timeoff Invalid</field>
-        <field name="type">qweb</field>
-        <field name="url">/timeoff/invalid</field>
-        <field name="website_published">True</field>
-        <field name="key">timeoff_custom.timeoff_invalid</field>
-        <field name="arch" type="xml">
-            <t name="Invalid" t-name="timeoff_custom.timeoff_invalid">
-                <t t-call="website.layout">
-                  <div id="wrap">
-                    <div class="container">
-                        <h1>Request Denied!</h1>
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="alert alert-success" role="status">
-                                    <t t-esc="error_message"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                </t>
-            </t>
-        </field>
-    </record>
-
     <record id="timeoff_exceeded" model="website.page">
         <field name="name">Timeoff Exceeded</field>
         <field name="type">qweb</field>

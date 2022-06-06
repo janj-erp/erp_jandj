@@ -81,20 +81,20 @@ class Timeoff(http.Controller):
                   }
 
         kw.update(kw_add)
-        leave = request.env['hr.leave'].with_user(user.id).create(kw)
-        leave.number_of_days += 1
+        try:
+            leave = request.env['hr.leave'].with_user(user.id).create(kw)
+            leave.number_of_days += 1
 
-        try:
-            leave._check_leave_type_validity()
-        except Exception as ve:
-            leave.unlink()
-            values = {'error_message': ve.__str__()}
-            return http.request.render('timeoff_custom.timeoff_invalid', values)
-        try:
-            leave._compute_from_holiday_status_id()
-            leave._check_allocation_id()
-        except Exception as ve:
-            leave.unlink()
+        # try:
+        #     leave._check_leave_type_validity()
+        # except Exception as ve:
+        #     leave.unlink()
+        #     values = {'error_message': ve.__str__()}
+        #     return http.request.render('timeoff_custom.timeoff_invalid', values)
+        # try:
+        #     leave._compute_from_holiday_status_id()
+        #     leave._check_allocation_id()
+        except ValidationError as ve:
             values = {'error_message': ve.__str__()}
             return http.request.render('timeoff_custom.timeoff_exceeded', values)
 
