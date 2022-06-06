@@ -10,7 +10,7 @@
                 <field name="job_title" attrs="{'readonly': [('read_id', '=', False)]}"/>
             </xpath>
             <xpath expr="//field[@name='mobile_phone']" position="before">
-                <field name="job_id"/>
+                <field name="job_id" />
             </xpath>
         </field>
     </record>
