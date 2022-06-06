@@ -136,4 +136,31 @@
         </field>
     </record>
 
+    <record id="timeoff_invalid" model="website.page">
+        <field name="name">Timeoff Invalid</field>
+        <field name="type">qweb</field>
+        <field name="url">/timeoff/invalid</field>
+        <field name="website_published">True</field>
+        <field name="key">timeoff_custom.timeoff_invalid</field>
+        <field name="arch" type="xml">
+            <t name="Invalid" t-name="timeoff_custom.timeoff_invalid">
+                <t t-call="website.layout">
+                  <div id="wrap">
+                    <div class="container">
+                        <h1>Sorry..</h1>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="alert alert-success" role="status">
+                                    The time off requested by you has not been allocated!
+                                    Please contact your manager.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
 </odoo>

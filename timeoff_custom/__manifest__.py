@@ -2,7 +2,7 @@
 {
     'name': 'Timeoff Enhancements',
     'summary': """This module customizes for allowing portal user to manage their timeoffs """,
-    'version': '15.0.0.1 22APR2021-2',
+    'version': '15.3 06JUN2021-2',
     'description': """""",
     'author': 'PMCS',
     'sequence':1000,

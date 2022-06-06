@@ -60,6 +60,8 @@ class Timeoff(http.Controller):
         # print("Data Received.....", kw)
         if kw.get('holiday_status_id'):
             holiday_status_id = request.env['hr.leave.type'].sudo().search([('id', '=', kw['holiday_status_id'])])
+            if holiday_status_id.requires_allocation == 'yes' and not holiday_status_id.has_valid_allocation:
+                return http.request.render('timeoff_custom.timeoff_invalid')
             kw['holiday_status_id'] = holiday_status_id.id
         else:
             kw['holiday_status_id'] = False
