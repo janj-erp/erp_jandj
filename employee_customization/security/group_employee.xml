@@ -28,7 +28,7 @@
 
     <record id="users_contract_history_rules" model="ir.rule">
         <field name="name">Store User Contract history Rules</field>
-        <field ref="hr.model_hr_contract_history" name="model_id"/>
+        <field ref="hr_contract.model_hr_contract_history" name="model_id"/>
         <field name="domain_force">[('employee_id.work_location_id','=',user.hr_work_location_id.id)]</field>
         <field name="perm_read" eval="1"/>
         <field name="perm_write" eval="1"/>
@@ -39,7 +39,7 @@
 
     <record id="users_payslip_rules" model="ir.rule">
         <field name="name">Store User Payslip Rules</field>
-        <field ref="hr.model_hr_payslip" name="model_id"/>
+        <field ref="hr_payroll.model_hr_payslip" name="model_id"/>
         <field name="domain_force">[('employee_id.work_location_id','=',user.hr_work_location_id.id)]</field>
         <field name="perm_read" eval="1"/>
         <field name="perm_write" eval="1"/>
