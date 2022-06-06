@@ -2,7 +2,6 @@ from odoo.addons.portal.controllers import portal
 
 from odoo import fields, http, _
 from odoo.http import request
-from odoo.exceptions import ValidationError
 
 
 class TimeoffPortal(portal.CustomerPortal):
@@ -84,17 +83,7 @@ class Timeoff(http.Controller):
         try:
             leave = request.env['hr.leave'].with_user(user.id).create(kw)
             leave.number_of_days += 1
-
-        # try:
-        #     leave._check_leave_type_validity()
-        # except Exception as ve:
-        #     leave.unlink()
-        #     values = {'error_message': ve.__str__()}
-        #     return http.request.render('timeoff_custom.timeoff_invalid', values)
-        # try:
-        #     leave._compute_from_holiday_status_id()
-        #     leave._check_allocation_id()
-        except ValidationError as ve:
+        except Exception as ve:
             values = {'error_message': ve.__str__()}
             return http.request.render('timeoff_custom.timeoff_exceeded', values)
 
