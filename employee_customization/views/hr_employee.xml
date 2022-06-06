@@ -8,7 +8,9 @@
             <xpath expr="//field[@name='job_title']" position="replace">
                 <field name="read_id" invisible="1"/>
                 <field name="job_title" attrs="{'readonly': [('read_id', '=', False)]}"/>
-                <br/><field name="job_id"/>
+            </xpath>
+            <xpath expr="//field[@name='mobile_phone']" position="before">
+                <field name="job_id"/>
             </xpath>
         </field>
     </record>
