@@ -77,16 +77,19 @@ class Product(models.Model):
     
  ##Move to new module later
 
-class ResBankIn(models.Model):
-    _inherit = 'res.bank'
+# class ResBankIn(models.Model):
+#     _inherit = 'res.bank'
 
-    branch_name = fields.Char('Branch Name')
+#     branch_name = fields.Char('Branch Name')
+    
+#     def name_get(self):
+#         return [(rec.id, f"{rec.name} / {rec.branch_name}") for rec in self]
     
 
-class BankAccountIn(models.Model):
-    _inherit = 'res.partner.bank'
+# class BankAccountIn(models.Model):
+#     _inherit = 'res.partner.bank'
 
-    branch_name = fields.Char('Branch Name', related='bank_id.branch_name')
+#     branch_name = fields.Char('Branch Name', related='bank_id.branch_name')
 
 
 
