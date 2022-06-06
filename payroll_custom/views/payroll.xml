@@ -31,6 +31,12 @@
                           <th>
                               <span class='d-none d-md-inline'>Payslip dates</span>
                           </th>
+                          <th>
+                              <br/>
+                          </th>
+                          <th>
+                              <span class='d-none d-md-inline'>Payslip dates</span>
+                          </th>
                       </tr>
                   </thead>
                   <t t-foreach="slips" t-as="slip">
@@ -49,6 +55,9 @@
                                           <a>Download</a>
                                       </button>
                                   </div>
+                              </td>
+                              <td>
+                                  <t t-esc="slip.state" />
                               </td>
                           </tr>
                       </form>
