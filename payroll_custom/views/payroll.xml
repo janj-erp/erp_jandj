@@ -32,10 +32,10 @@
                               <span class='d-none d-md-inline'>Payslip dates</span>
                           </th>
                           <th>
-                              <br/>
+                              <span class='d-none d-md-inline'>Payslip Status</span>
                           </th>
                           <th>
-                              <span class='d-none d-md-inline'>Payslip dates</span>
+                              <br/>
                           </th>
                       </tr>
                   </thead>
@@ -49,15 +49,15 @@
                                   <t t-esc="slip.date_from" /> - <t t-esc="slip.date_to" />
                               </td>
                               <td>
+                                  <div t-field="slip.state"/>
+                              </td>
+                              <td>
                                   <div class="form-inline ml-lg-4">
                                       <input type="hidden" name="slip_id" t-att-value="slip.id"/>
                                       <button type="submit" class="btn btn-primary" name='print_slip'>
                                           <a>Download</a>
                                       </button>
                                   </div>
-                              </td>
-                              <td>
-                                  <div t-field="slip.state"/>
                               </td>
                           </tr>
                       </form>
