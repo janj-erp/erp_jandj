@@ -61,8 +61,8 @@ class Timeoff(http.Controller):
         # print("Data Received.....", kw)
         if kw.get('holiday_status_id'):
             holiday_status_id = request.env['hr.leave.type'].sudo().search([('id', '=', kw['holiday_status_id'])])
-            # if holiday_status_id.requires_allocation == 'yes' and not holiday_status_id.has_valid_allocation:
-            #     return http.request.render('timeoff_custom.timeoff_invalid')
+            if holiday_status_id.requires_allocation == 'yes' and not holiday_status_id.has_valid_allocation:
+                return http.request.render('timeoff_custom.timeoff_invalid')
             kw['holiday_status_id'] = holiday_status_id.id
         else:
             kw['holiday_status_id'] = False
@@ -86,14 +86,14 @@ class Timeoff(http.Controller):
 
         try:
             leave._check_leave_type_validity()
-        except ValidationError as ve:
+        except Exception as ve:
             leave.unlink()
             values = {'error_message': ve.__str__()}
             return http.request.render('timeoff_custom.timeoff_invalid', values)
         try:
             leave._compute_from_holiday_status_id()
             leave._check_allocation_id()
-        except ValidationError as ve:
+        except Exception as ve:
             leave.unlink()
             values = {'error_message': ve.__str__()}
             return http.request.render('timeoff_custom.timeoff_exceeded', values)
