@@ -28,14 +28,14 @@
 
     <record id="admin_acc_location_rule" model="ir.rule">
         <field name="name">Admin location rule</field>
-        <field ref="hr.model_hr_work_location" name="model_id"/>
+        <field ref="hr.model_hr_job" name="model_id"/>
         <field name="domain_force">[(1,'=',1)]</field>
         <field name="groups" eval="[(4, ref('base.group_system'))]"/>
     </record>
 
     <record id="store_user_record_rule" model="ir.rule">
         <field name="name">Store User rule</field>
-        <field ref="hr.model_hr_work_location" name="model_id"/>
+        <field ref="hr.model_hr_job" name="model_id"/>
         <field name="domain_force">[(1,'!=',1)]</field>
         <field name="perm_read" eval="1"/>
         <field name="perm_write" eval="0"/>
