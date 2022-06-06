@@ -2,6 +2,8 @@ from odoo.addons.portal.controllers import portal
 
 from odoo import fields, http, _
 from odoo.http import request
+from datetime import datetime
+
 
 
 class TimeoffPortal(portal.CustomerPortal):
@@ -61,7 +63,8 @@ class Timeoff(http.Controller):
         if kw.get('holiday_status_id'):
             holiday_status_id = request.env['hr.leave.type'].sudo().search([('id', '=', kw['holiday_status_id'])])
             # if holiday_status_id.requires_allocation == 'yes' and not holiday_status_id.has_valid_allocation:
-            #     return http.request.render('timeoff_custom.timeoff_invalid', {'error_message': f"You have not been allocated any leaves of {holiday_status_id.name}! Please contact your manager"})
+            #     return http.request.render('timeoff_custom.timeoff_invalid', {
+            #         'error_message': f"You have not been allocated any leaves of {holiday_status_id.name} type."})
             kw['holiday_status_id'] = holiday_status_id.id
         else:
             kw['holiday_status_id'] = False
@@ -80,11 +83,51 @@ class Timeoff(http.Controller):
                   }
 
         kw.update(kw_add)
-        try:
-            leave = request.env['hr.leave'].with_user(user.id).create(kw)
-            leave.number_of_days += 1
-        except Exception as ve:
-            values = {'error_message': ve.__str__()}
-            return http.request.render('timeoff_custom.timeoff_exceeded', values)
+
+        # date_format = "%Y-%m-%d"
+        # a = datetime.strptime(kw_add.get('request_date_from'), date_format)
+        # b = datetime.strptime(kw_add.get('request_date_to'), date_format)
+        # delta = b - a
+        #
+        #
+        #
+        # print(kw_add, type(kw_add['request_date_to']), delta, delta.days)
+        #
+        # found_allocations = request.env['hr.leave.allocation'].search([
+        #     ('holiday_status_id', '=', kw.get('holiday_status_id')),
+        #     ('employee_id', '=', kw.get('employee_id')),
+        #     ('state', '=', 'validate')
+        # ])
+        # if not found_allocations:
+        #     return http.request.render('timeoff_custom.timeoff_invalid', {
+        #         'error_message': f"You have not been allocated any leaves of {holiday_status_id.name} type.",
+        #     })
+        # else:
+        #     valid_allocations = found_allocations.filtered(lambda allocation:
+        #                                                    allocation.date_from <= kw['request_date_from'] and
+        #                                                    allocation.date_to >= kw['request_date_to'])
+        #     start_date = min(valid_allocations.mapped('date_from'))
+        #     end_date = min(valid_allocations.mapped('date_to'))
+        #     total_leaves = sum(valid_allocations.mapped('number_of_days_display'))
+        #     if not valid_allocations:
+        #         return http.request.render('timeoff_custom.timeoff_invalid', {
+        #             'error_message': f"You do not have any leaves allocated between {kw['request_date_from']} and "
+        #                              f"{kw['request_date_to']}",
+        #         })
+        # leaves = request.env['hr.leave'].search([
+        #     ('employee_id', '=', kw.get('employee_id')),
+        #     ('state', '=', 'validate'),
+        #     ('date_from', '>=', start_date),
+        #     ('date_to', '<=', end_date),
+        # ])
+        # leaves_left = total_leaves - sum(leaves.mapped('number_of_days'))
+        # if leaves_left < delta.days + 1:
+        #     return http.request.render('timeoff_custom.timeoff_invalid', {
+        #             'error_message': f"You have only {leaves_left} leaves left. Requested {delta.days + 1} days."
+        #         })
+
+        leave = request.env['hr.leave'].with_user(user.id).create(kw)
+        leave.number_of_days += 1
+        # print(leave)
 
         return http.request.render('timeoff_custom.timeoff_created')

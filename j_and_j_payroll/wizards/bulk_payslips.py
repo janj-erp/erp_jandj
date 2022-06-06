@@ -20,10 +20,20 @@ class BulkPayslips(models.TransientModel):
         date_from = self.date_from
         date_to = self.date_to
         batch_obj = self.env['hr.payslip.run']
-        batch = batch_obj.create({'name': format_date(self.env, date_from, date_format="MMMM y"),
-                                  'date_start': date_from,
-                                  'date_end': date_to,
-                                  })
+        week = date_from.isocalendar()[1] - date_from.replace(day=1).isocalendar()[1] + 1
+        if 'Weekly' in self.structure_id.name:
+            batch = batch_obj.create({'name':
+                                      '%(week)s- Week- %(dates)s' % {
+                                          'week': week,
+                                          'dates': format_date(self.env, date_from, date_format="MMMM y")},
+                                      'date_start': date_from,
+                                      'date_end': date_to,
+                                      })
+        else:
+            batch = batch_obj.create({'name': format_date(self.env, date_from, date_format="MMMM y"),
+                                      'date_start': date_from,
+                                      'date_end': date_to,
+                                      })
         for emp in employee:
             if emp.contract_id :
                 vals = {'employee_id': emp.id,
