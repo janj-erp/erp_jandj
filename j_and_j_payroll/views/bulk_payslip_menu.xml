@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+    <menuitem id="menu_hr_bulk_payslips"
+        name="Bulk Payslips"
+        action="hr_bulk_payslips_action"
+        sequence="3"
+        parent="hr_payroll.menu_hr_payroll_payslips"/>
+
+</odoo>

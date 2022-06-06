@@ -11,7 +11,6 @@
     'category': 'Sale',
     'depends': ['base','hr','website','mail','portal','hr_holidays'],
     'data': [
-        'views/res_partners.xml',
         'views/timeoff_list.xml',
         'views/timeoff_create.xml',
     ],
