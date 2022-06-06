@@ -57,7 +57,7 @@
                                   </div>
                               </td>
                               <td>
-                                  <t t-esc="slip.state" />
+                                  <t t-field="slip.state"/>
                               </td>
                           </tr>
                       </form>
