@@ -25,24 +25,5 @@
     <record model="ir.ui.menu" id="hr.menu_human_resources_configuration">
           <field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>
     </record>
-    
-<!--     <record id="admin_acc_location_rule" model="ir.rule">
-<!--         <field name="name">Admin location rule</field> -->
-<!--         <field ref="hr.model_hr_job" name="model_id"/> -->
-<!--         <field name="domain_force">[(1,'=',1)]</field> -->
-<!--         <field name="groups" eval="[(4, ref('base.group_system'))]"/> -->
-<!--     </record> -->
-
-<!--     <record id="store_user_record_rule" model="ir.rule"> -->
-<!--         <field name="name">Store User rule</field> -->
-<!--         <field ref="hr.model_hr_job" name="model_id"/> -->
-<!--         <field name="domain_force">[(1,'=',1)]</field> -->
-<!--         <field name="perm_read" eval="1"/> -->
-<!--         <field name="perm_write" eval="0"/> -->
-<!--         <field name="perm_create" eval="0"/> -->
-<!--         <field name="perm_unlink" eval="0"/> -->
-<!--         <field name="groups" eval="[(4, ref('employee_customization.group_show_tree_employee_records'))]"/> -->
-<!--     </record> -->
-
 
 </odoo>
