@@ -83,7 +83,7 @@ class ResBankIn(models.Model):
     branch_name = fields.Char('Branch Name')
     
     def name_get(self):
-        return [(rec.id, f"{rec.name} / {rec.branch_name}") for rec in self]
+        return [(rec.id, f"{rec.name} {rec.branch_name and '/' + rec.branch_name or ''}") for rec in self]
     
 
 # class BankAccountIn(models.Model):
