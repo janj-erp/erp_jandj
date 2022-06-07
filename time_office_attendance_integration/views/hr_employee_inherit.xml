@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_employee_form_time_office_integration" model="ir.ui.view">
+        <field name="name">hr.employee.form.time.office.integration</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='identification_group']/field[@name='pin']" position="after">
+                <label for="device_emp_code" string="Biometric Device Employee Code"/>
+                    <div class="oe_inline">
+                        <field name="device_emp_code"/>&amp;nbsp;
+                        <button type="object" string="Fetch Attendance" name="fetch_employee_attendance" class="btn btn-primary"/>
+                    </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
