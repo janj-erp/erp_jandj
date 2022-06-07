@@ -27,7 +27,7 @@
 
     <menuitem
         id="menu_item_action_attendance_sync_wizard"
-        parent="hr_attendance.menu_hr_attendance_manage_attendances"
+        parent="hr_attendance.menu_hr_attendance_root"
         action="time_office_attendance_integration.action_attendance_sync_wizard"
         name="Sync Attendance"
         sequence="13"
