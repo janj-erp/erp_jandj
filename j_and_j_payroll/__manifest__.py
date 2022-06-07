@@ -1,6 +1,6 @@
 {
     'name' : 'J & J Payroll',
-    'version' : '15.0.0.5 june-6',
+    'version' : '15.0.0.6 june-7',
     'summary': 'J & J Payroll Configuration',
     'sequence': 10,
     'description': """

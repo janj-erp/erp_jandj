@@ -3,6 +3,7 @@ from datetime import date, datetime ,timedelta
 from odoo.tools.misc import format_date
 
 
+
 class BulkPayslips(models.TransientModel):
     _name = 'bulk.payslip.wizard'
     _description = 'Wizard to generate bulk payslips'
@@ -20,12 +21,14 @@ class BulkPayslips(models.TransientModel):
         date_from = self.date_from
         date_to = self.date_to
         batch_obj = self.env['hr.payslip.run']
-        week = date_from.isocalendar()[1] - date_from.replace(day=1).isocalendar()[1] + 1
+        week = date_from.strftime("%W")
         if 'Weekly' in self.structure_id.name:
             batch = batch_obj.create({'name':
-                                      '%(week)s- Week- %(dates)s' % {
+                                      '%(week)s- Week- From %(date_start)s - To  %(date_end)s' % {
                                           'week': week,
-                                          'dates': format_date(self.env, date_from, date_format="MMMM y")},
+                                          'date_start': format_date(self.env, date_from, date_format="d MMM y"),
+                                          'date_end': format_date(self.env, date_to, date_format="d MMM y"),
+                                      },
                                       'date_start': date_from,
                                       'date_end': date_to,
                                       })
@@ -52,5 +55,7 @@ class BulkPayslips(models.TransientModel):
                 new_rec.get_total_number_of_days()
                 new_rec.get_total_unpaid_of_days()
                 new_rec.compute_sheet()
+
+
 
 
