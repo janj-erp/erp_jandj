@@ -30,7 +30,10 @@ class BankTransferSummaryXlsx(models.AbstractModel):
         row = 3
         col = 0
         title = [ 'S.No','Employee Name',
+                  'Bank Name',
+                  'Branch',
                   'Bank Account Number',
+                  'Type Of Account',
                   'Net Salary',
                  ]
         for i in range(len(title)):
@@ -48,7 +51,13 @@ class BankTransferSummaryXlsx(models.AbstractModel):
                 col = col + 1
                 sheet.write(row, col, payslip.employee_id.name)
                 col = col + 1
+                sheet.write(row, col,payslip.employee_id.bank_account_id.bank_id.name if payslip.employee_id.bank_account_id.bank_id.name else ' ')
+                col = col + 1
+                sheet.write(row, col,payslip.employee_id.bank_account_id.bank_id.branch_name if payslip.employee_id.bank_account_id.bank_id.branch_name else ' ')
+                col = col + 1
                 sheet.write(row, col, payslip.employee_id.bank_account_id.acc_number if payslip.employee_id.bank_account_id.acc_number else ' ')
+                col = col + 1
+                sheet.write(row, col,payslip.employee_id.bank_account_id.account_type if payslip.employee_id.bank_account_id.account_type else ' ')
                 col = col + 1
                 rec = {}
                 for line in payslip.line_ids :
