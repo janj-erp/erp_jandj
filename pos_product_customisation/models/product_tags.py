@@ -70,26 +70,6 @@ class Product(models.Model):
     @api.onchange('default_code')
     def _onchange_default_code(self):
         return
-    
-    
-    
-    
-    
- ##Move to new module later
-
-class ResBankIn(models.Model):
-    _inherit = 'res.bank'
-
-    branch_name = fields.Char('Branch Name')
-    
-    def name_get(self):
-        return [(rec.id, f"{rec.name}{rec.branch_name and '/' + rec.branch_name or ''}") for rec in self]
-    
-
-# class BankAccountIn(models.Model):
-#     _inherit = 'res.partner.bank'
-
-#     branch_name = fields.Char('Branch Name', related='bank_id.branch_name')
 
 
 
