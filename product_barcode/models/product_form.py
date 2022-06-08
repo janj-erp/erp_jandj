@@ -115,11 +115,11 @@ class ProductTemplateAutoBarcode(models.Model):
             if not res.barcode:
                 barcode_id = res.id
                 barcode_search = False
+                ean = generate_ean(str(barcode_id))
                 while not barcode_search:
-                    ean = generate_ean(str(barcode_id))
                     if self.env['product.template'].search([('barcode', '=', ean)]):
                         barcode_search = False
-                        barcode_id += 1
+                        ean = str(int(ean) + 1)
                     else:
                         barcode_search = True
                 res.barcode = ean
