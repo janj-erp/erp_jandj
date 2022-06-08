@@ -18,18 +18,15 @@ class StockRequest(models.Model):
             location = self.env['stock.location'].search([('name', 'ilike', 'Vendor')], limit=1)
         else:
             operation_type = self.env['stock.picking.type'].search(
-                [('warehouse_id', '=', w_id), ('name', 'ilike', 'Internal')], limit=1)
+                [('warehouse_id', '=', int(data[3])), ('name', 'ilike', 'Internal')], limit=1)
             location = self.env['stock.location'].search([('name', '=', 'Stock')])
             for l in location:
                 if l.warehouse_id.id == int(data[3]):
-                    print(l, l.name, l.location_id.name)
                     location = l
                     break
-        print('LocationName: ', location.name)
         location_dest = self.env['stock.location'].search([('name', '=', 'Stock')])
         for l in location_dest:
             if l.warehouse_id.id == w_id:
-                print(l, l.name, l.location_id.name)
                 location_dest = l
                 break
         # location_dest = self.env['stock.location'].search([('warehouse_id', '=', pos_id.warehouse_id.id)], limit=1)
@@ -53,8 +50,6 @@ class StockRequest(models.Model):
             res.action_confirm()
             res.action_set_quantities_to_reservation()
             res.button_validate()
-        # raise ValidationError('Wait')
-        # print(operation_type.mapped('name'))
 
     # def get_products(self):
     #     x = self.env['product.product'].search([])
@@ -71,17 +66,12 @@ class StockRequest(models.Model):
 
     def get_products(self):
         rec = self.env['product.product'].search([])
-        products = [{'id': product.id, 'name': product.name +
-                                               ''.join([" " + attrs.name
-                                                        for attrs in product.product_template_variant_value_ids])}
-                    for product in rec]
-        # print(products)
+        products = [{'id': product.id, 'name': product.name + ''.join([" " + attrs.name for attrs in product.product_template_variant_value_ids])} for product in rec]
         return products
 
     def get_warehouses(self):
         rec = self.env['stock.warehouse'].search([])
         warehouses = [{'id': warehouse.id, 'name': warehouse.name} for warehouse in rec]
-        # print(warehouses)
         return warehouses
 
 
