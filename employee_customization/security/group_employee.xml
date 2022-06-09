@@ -48,4 +48,15 @@
         <field name="groups" eval="[(4, ref('employee_customization.group_show_tree_employee_records'))]"/>
     </record>
 
+    <record id="users_pos_rules" model="ir.rule">
+        <field name="name">Store User POS Rules</field>
+        <field ref="point_of_sale.model_pos_config" name="model_id"/>
+        <field name="domain_force">[('picking_type_id.warehouse_id','=',user.property_warehouse_id.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="groups" eval="[(4, ref('employee_customization.group_show_tree_employee_records'))]"/>
+    </record>
+
 </odoo>

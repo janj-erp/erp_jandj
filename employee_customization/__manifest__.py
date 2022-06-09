@@ -8,7 +8,7 @@
     'sequence': 1,
     'description': """Enhancement has been done in various models, created new models, fields and edited the flow of models""",
     'category': 'Tools',
-    'depends': ['hr', 'base'],
+    'depends': ['hr', 'base', 'point_of_sale'],
     'data': [
         'views/res_users.xml',
         'views/hr_employee.xml',
