@@ -2,7 +2,7 @@
 
 {
     'name': 'Product Stock Moves from POS',
-    'version': '1.3',
+    'version': '1.2',
     'category': 'Point of Sale',
     'summary': '''1. Request Products from POS Interface \n
                   2. Update Product's quantity from POS Interface''',
@@ -14,7 +14,6 @@
         'security/ir.model.access.csv',
         'views/assets.xml',
         'views/product_view.xml',
-        # 'data/server_actions.xml',
     ],
     # 'qweb': [
     #     'static/src/xml/product_create_button.xml',
