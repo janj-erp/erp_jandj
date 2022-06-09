@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_payroll_summary_wizard,access.payroll.summary.wizard,model_payroll_summary_wizard,,1,1,1,1
-access_bank_transfer_wizard,access.bank.transfer.wizard,model_bank_transfer_wizard,,1,1,1,1
-
-
