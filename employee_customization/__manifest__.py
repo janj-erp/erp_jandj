@@ -1,6 +1,6 @@
 {
     'name': 'Employee Customization',
-    'version': '15.1',
+    'version': '15.2',
     'summary': 'Enhancement has been done in various models, created new models, fields and edited the flow of models',
     'author': 'Murali GM',
     'created_on': '18 May',
