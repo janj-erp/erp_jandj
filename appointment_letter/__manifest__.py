@@ -1,0 +1,20 @@
+{
+    'name': 'Appointment Letter',
+    'summary': """This module adds the custom appointment letter to the selected candidate""",
+    'version': '15.0.0.1 28-jan',
+    'description': """This module adds the custom appointment letter to the selected candidate""",
+    'author': 'PMCS',
+    'sequence': 10,
+    'company': 'prime minds consulting pvt ltd',
+    'website': 'http://www.primeminds.com',
+    'category': 'tool',
+    'depends': ['base','hr','hr_recruitment'],
+    'data': [
+        'reports/appointment_letter.xml',
+        'reports/menu.xml',
+        'views/hr_applicant.xml',
+    ],
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}

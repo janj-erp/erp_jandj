@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="paperformat_commission_slip" model="report.paperformat">
+        <field name="name">Employee Commission Slip</field>
+        <field name="default" eval="False"/>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_commission_payslip" model="ir.actions.report">
+        <field name="name">Payslip Report</field>
+        <field name="model">commission.slip.print</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">employee_commision.commission_payslip_report</field>
+        <field name="report_file">employee_commision.commission_payslip_report</field>
+        <field name="binding_model_id" ref="model_commission_slip_print"/>
+        <field name="paperformat_id" ref="employee_commision.paperformat_commission_slip"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
