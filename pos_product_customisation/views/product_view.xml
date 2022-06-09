@@ -161,6 +161,17 @@
                 </xpath>
             </field>
         </record>
+
+        <record model="ir.ui.view" id="product_product_easy_view_inherit">
+            <field name="name">Product Variant Easy View changes</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <field name="pos_categ_id"/>
+                </xpath>
+            </field>
+        </record>
         
 
     </data>

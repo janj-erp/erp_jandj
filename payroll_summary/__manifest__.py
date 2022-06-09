@@ -1,6 +1,6 @@
 {
     'name' : 'J & J Payroll Summary',
-    'version' : '15.0.0.3 june-7',
+    'version' : '15.0.0.4 june-8',
     'summary': 'J & J Payroll Summary',
     'sequence': 10,
     'description': """

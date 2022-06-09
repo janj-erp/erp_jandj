@@ -15,7 +15,7 @@
                     <header>
                         <button name="create_user" string="Create User" type="object" class="oe_highlight"
                                 attrs="{'invisible':[('is_created','=',True)]}"
-                                groups="usergroups.group_hr_executive"/>
+                                groups="base.group_system"/>
                     </header>
                 </xpath>
                 <field name="work_email" position="attributes">
