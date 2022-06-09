@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_commission_conf,access.commission.conf,model_commission_conf,base.group_user,1,1,1,1
-access_hr_employee_commission,access.hr.employee.commission,model_hr_employee_commission,base.group_user,1,1,1,1
-access_commission_lines,access.commission.lines,model_commission_lines,base.group_user,1,1,1,1
-access_commission_compute_wizard,access.commission.compute.wizard,model_commission_computation_wizard,base.group_user,1,1,1,1
-access_commission_slip_print,access.commission.slip.print,model_commission_slip_print,base.group_user,1,1,1,1
