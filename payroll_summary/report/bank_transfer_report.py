@@ -66,7 +66,7 @@ class BankTransferSummaryXlsx(models.AbstractModel):
                         total_net += round(line.total)
                 num = len(title)
                 for i in range(num):
-                    col = 3
+                    col = 6
                     sheet.write(row, col, rec.get('NET'))
                     col = col + 1
         row += 1
@@ -74,7 +74,7 @@ class BankTransferSummaryXlsx(models.AbstractModel):
         sheet.write(row, col, 'Grand Total', bold)
         num = len(title)
         for i in range(num):
-            col = 3
+            col = 6
             sheet.write(row, col, total_net, bold)
             col = col + 1
 

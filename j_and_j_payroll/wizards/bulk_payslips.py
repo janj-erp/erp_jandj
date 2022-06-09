@@ -24,7 +24,7 @@ class BulkPayslips(models.TransientModel):
         week = date_from.strftime("%W")
         if 'Weekly' in self.structure_id.name:
             batch = batch_obj.create({'name':
-                                      '%(week)s- Week- From %(date_start)s - To  %(date_end)s' % {
+                                      'Week_%(week)s  - %(date_start)s  To  %(date_end)s' % {
                                           'week': week,
                                           'date_start': format_date(self.env, date_from, date_format="d MMM y"),
                                           'date_end': format_date(self.env, date_to, date_format="d MMM y"),
