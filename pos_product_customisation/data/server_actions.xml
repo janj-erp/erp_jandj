@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="add_template_category_action" model="ir.actions.server">
+        <field name="name">Group variants by template</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">
+records.add_template_category()
+        </field>
+    </record>
+
+    <record id="remove_template_category_action" model="ir.actions.server">
+        <field name="name">Remove group by template on variants</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">
+records.remove_template_category()
+        </field>
+    </record>
+</odoo>
