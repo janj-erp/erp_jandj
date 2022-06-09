@@ -11,13 +11,13 @@
                     <field name="related_user" string="Portal User" attrs="{'invisible': [('user_id', '!=', False)]}"/>
                     <field name="user_id" string="Internal User" attrs="{'invisible': [('related_user', '!=', False)]}" />
                 </xpath>
-                <xpath expr="//form/sheet" position="before">
-                    <header>
-                        <button name="create_user" string="Create User" type="object" class="oe_highlight"
-                                attrs="{'invisible':[('is_created','=',True)]}"
-                                groups="base.group_system"/>
-                    </header>
-                </xpath>
+<!--                <xpath expr="//form/sheet" position="before">-->
+<!--                    <header>-->
+<!--                        <button name="create_user" string="Create User" type="object" class="oe_highlight"-->
+<!--                                attrs="{'invisible':[('is_created','=',True)]}"-->
+<!--                                groups="base.group_system"/>-->
+<!--                    </header>-->
+<!--                </xpath>-->
                 <field name="work_email" position="attributes">
                     <attribute name="required">1</attribute>
                 </field>

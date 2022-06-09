@@ -7,7 +7,7 @@
     'author': 'Prime Minds',
     'website': "https://primeminds.co/",
     'depends': ['base', 'hr'],
-    'data': ['views/user_creation_from_employee_view.xml'],
+    'data': ['views/user_creation_from_employees_view.xml'],
     'license': 'AGPL-3',
     'installable': True,
     'auto_install': False,
