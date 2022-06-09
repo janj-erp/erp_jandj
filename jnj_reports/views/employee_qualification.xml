@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_employee_background" model="ir.ui.view">
+        <field name="name">employee.background.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='hr_settings']" position="after">
+                <page name="education_detail" string="Qualification">
+                    <field name="employee_qualification" readonly="0">
+                        <tree>
+                            <field name="institute_type" optional="show"/>
+                            <field name="institute_name" optional="show"/>
+                            <field name="degree_received" optional="show"/>
+                            <field name="years_completed_of_course" optional="show"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="institute_type"/>
+                                <field name="institute_name"/>
+                                <field name="degree_received" optional="show"/>
+                                <field name="years_completed_of_course"/>
+                            </group>
+                        </form>
+                    </field>
+
+                    <group col="3" string="References(Exclude Relatives)">
+                        <group string="Reference 1">
+                            <field name="ref_name_1" string="First Reference Name"/>
+                            <field name="ref_address_1" string="First Reference Address"/>
+                            <field name="ref_occupation_1" string="First Reference Occupation"/>
+                            <field name="relationship_ref_1" string="First Reference Relationship"/>
+                            <field name="ref_phone_1" string="First Reference Phone No"/>
+                        </group>
+                        <group string="Reference 2">
+                            <field name="ref_name_2" string="Second Reference Name"/>
+                            <field name="ref_address_2" string="Second Reference Address"/>
+                            <field name="ref_occupation_2" string="Second Reference Occupation"/>
+                            <field name="relationship_ref_2" string="Second Reference Relationship"/>
+                            <field name="ref_phone_2" string="Second Reference Phone No"/>
+                        </group>
+                        <group string="Reference 3">
+                            <field name="ref_name_3" string="Third Reference Name"/>
+                            <field name="ref_address_3" string="Third Reference Address"/>
+                            <field name="ref_occupation_3" string="Third Reference Occupation"/>
+                            <field name="relationship_ref_3" string="Third Reference Relationship"/>
+                            <field name="ref_phone_3" string="Third Reference Phone No"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

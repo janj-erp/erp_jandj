@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		
+		<record id="wizard_import_chart" model="ir.ui.view">
+			<field name="name">wizard.wizard.import.chart.form</field>
+			<field name="model">import.chart.account</field>
+			<field name="arch" type="xml">
+				<form string="Import Product Data">
+             	   <group>
+                 	   <field name="file_select" filename="name"/>
+                	</group>
+					<footer>
+						<button string="Import" name="imoport_file"
+							type="object" class="oe_highlight" />
+						<button string="Cancel" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="bi_act_chart_of_account" model="ir.actions.act_window">
+			<field name="name">Import Product Variants</field>
+			<field name="res_model">import.chart.account</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_import_chart" />
+			<field name="target">new</field>
+		</record>
+
+		<!-- <menuitem
+    		id="menu_import"
+    		name="Imports"
+    		parent="account.menu_finance"
+    		groups="account.group_account_manager"
+    		sequence="5"/> -->
+		<menuitem
+    		id="menu_chart_of_account"
+    		action="bi_act_chart_of_account"
+    		name="Import Stock Transfer List"
+    		parent="stock.menu_stock_warehouse_mgmt"
+    		sequence="2"/>
+
+
+		 <!-- Excel Report Download Wizard Form View-->
+		 <record id="view_product_excel_form_extended" model="ir.ui.view">
+		 <field name="name">product.excel.extended.form</field>
+		 <field name="model">product.excel.extended</field>
+		 <field name="arch" type="xml">
+		 	<form string="Excel Report file">
+				 <group>
+					 <field name="excel_file" readonly="1" filename="file_name"/>
+					 <field name="file_name" invisible="1"/>
+				 </group>
+				 <footer>
+					 <button string="Cancel" class="oe_link oe_highlight" special="cancel"/>
+				</footer>
+			 </form>
+		 </field>
+		</record>
+
+		 <!-- Excel Report Download Wizard Action View-->
+		 <record id="action_product_excel_form" model="ir.actions.act_window">
+			 <field name="name">Reports Excel</field>
+			 <field name="view_id" ref="view_product_excel_form_extended"/>
+			 <field name="view_mode">form</field>
+			 <field name="res_model">product.excel.extended</field>
+			 <field name="target">new</field>
+		 </record>
+
+
+
+		<record id="wizard_import_picking" model="ir.ui.view">
+			<field name="name">wizard.wizard.import.picking.form</field>
+			<field name="model">import.chart.account</field>
+			<field name="arch" type="xml">
+				<form string="Import Product and Quantity">
+             	   <group>
+                 	   <field name="file_select" filename="name"/>
+                	</group>
+					<footer>
+						<button string="Import" name="import_stock"
+							type="object" class="oe_highlight" />
+						<button string="Cancel" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="wizard_import_picking_action" model="ir.actions.act_window">
+			<field name="name">Import Product Quantity</field>
+			<field name="res_model">import.chart.account</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="wizard_import_picking" />
+			<field name="target">new</field>
+		</record>
+
+		<record id="view_picking_button_inherit" model="ir.ui.view">
+            <field name="name">picking.import.button.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+				<xpath expr="//field[@name='location_dest_id']" position="after">
+					<button name="%(import_variants_stock_transfer.wizard_import_picking_action)d" type="action" string="Import List" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+				</xpath>
+            </field>
+        </record>
+
+
+
+
+	</data>
+</odoo>
