@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="payslip_template">
+        <t t-call="web.basic_layout">
+            <div style="border: 2px solid black;">
+                <div class = "page">
+                    <div class="oe_structure">
+                    <t t-foreach="docs" t-as="doc">
+                        <table>
+                            <tr>
+                                <td colspan="3"  style="width: 1000px; padding-left: 10px;text-align: left;  padding-top: 10px;" >
+                                    <span>
+                                        <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)"
+                                         width="5%" height="3%" alt="Logo"/>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="width: 1000px; text-align: center; font-size: 23px;font-weight: bold;">
+                                 <span t-esc="docs.get_branch_name()"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="width: 1000px; text-align: center; font-size: 23px;font-weight: bold;">
+                                 c/o  J &amp; J United Limited <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="width: 1000px; text-align: center; font-size: 17px;font-weight: bold;">
+                                   <t t-esc="doc.company_id.vat" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="6" style="width: 1000px; text-align: center; font-size: 19px">
+                                    <t t-if="'Weekly' in doc.struct_id.name">
+                                        Weekly Salary Slip
+                                    </t>
+                                  </td>
+                            </tr>
+                            <tr>
+                                <td colsapn="6" style="width: 1000px; text-align: center; font-size: 16px;border: 1px solid black;font-weight: bold;">
+                                    <t t-if="'Weekly' in doc.struct_id.name">
+                                        Period from : <t t-esc="doc.date_from.strftime('%d-%m-%Y')"/> Period To : <t t-esc="doc.date_to.strftime('%d-%m-%Y')"/>
+                                    </t>
+                                    <t t-if="'Monthly' in doc.struct_id.name">
+                                    Payslip for the month of <span t-esc="doc.date_from.strftime('%B - %Y')"/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td style="width: 1470px; padding-left: 5px; text-align: left; font-size: 15px;border: 1px solid black;">
+                                    Employee Name :
+                                        <span t-esc = 'doc.employee_id.name' style="float:right;width:75%;text-align:justify;"/>
+                                    <br/>
+                                    TRN :
+                                        <span t-esc="doc.employee_id.trn_number" style="float:right;width:75%;text-align:justify;"/>
+                                    <br/>
+                                     NIS number :
+                                        <span t-esc="doc.employee_id.nis_number" style="float:right;width:75%;text-align:justify;"/>
+                                    <br/>
+                                     Bank Account number :
+                                        <span t-esc="doc.employee_id.bank_account_id.acc_number" style="float:right;width:75%;text-align:justify;"/>
+                                    <br/>
+                                </td>
+
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td style="width: 250px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    Attendance Details
+                                </td>
+                                <td style="width: 250px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    Value
+                                </td>
+                                <td style="width: 210px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                </td>
+                                <td style="width: 205px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    Value
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 400px; vertical-align: top; padding-left: 5px; text-align: left; font-size: 15px;border: 1px solid black;">
+                                    <t t-if="'Weekly' in doc.struct_id.name">
+                                            Total Hours<br/>
+                                            Worked Hours<br/>
+                                    </t>
+                                    <t t-if="'Monthly' in doc.struct_id.name">
+                                            Total Days<br/>
+                                            Present Days<br/>
+                                    </t>
+                                </td>
+                                <td style="width: 200px; vertical-align: top; text-align: center; font-size: 15px;border: 1px solid black;">
+                                    <t t-if="'Weekly' in doc.struct_id.name">
+                                        <t t-esc="40.0"/><br/>
+                                        <t t-esc="round(doc.total_hours,2)"/>
+                                    </t>
+                                    <t t-if="'Monthly' in doc.struct_id.name">
+                                        <t t-esc="doc.total_days"/><br/>
+                                        <t t-esc="doc.total_days"/>
+                                    </t>
+                                </td>
+                                <td style="width: 210px; vertical-align: top; padding-left: 5px; text-align: left; font-size: 15px;border: 1px solid black;">
+                                    <t t-if="'Weekly' in doc.struct_id.name">
+                                        OT Hours<br/>
+                                        Holiday OT Hours
+                                    </t>
+                                    <t t-if="'Monthly' in doc.struct_id.name">
+                                        LOP
+                                    </t>
+                                </td>
+                                <td style="width: 205px; vertical-align: top; text-align: center; font-size: 15px;border: 1px solid black;">
+                                    <t t-if="'Weekly' in doc.struct_id.name">
+                                        <t t-if="doc.total_hours &gt; 40">
+                                            <t t-esc="round(doc.total_hours - 40,2)"/><br/>
+                                        </t>
+                                        <t t-if="doc.total_hours &lt; 40">
+                                            <t t-esc="0.0"/><br/>
+                                        </t>
+                                        <t t-esc="doc.holiday_ot"/><br/>
+                                    </t>
+                                    <t t-if="'Monthly' in doc.struct_id.name">
+                                        <t t-esc="doc.unpaid_days"/><br/>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td style="width: 250px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    Earnings
+                                </td>
+                                <td style="width: 250px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    <t t-if="'Weekly' in doc.struct_id.name">
+                                            Weekly Gross
+                                    </t>
+                                    <t t-if="'Monthly' in doc.struct_id.name">
+                                            Monthly Gross
+                                    </t>
+                                </td>
+                                <td style="width: 250px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    YTD
+                                </td>
+                                <td style="width: 250px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    Deductions
+                                </td>
+                                <td style="width: 250px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    <t t-if="'Weekly' in doc.struct_id.name">
+                                            Weekly Deductions
+                                    </t>
+                                    <t t-if="'Monthly' in doc.struct_id.name">
+                                            Monthly Deductions
+                                    </t>
+                                </td>
+                                <td style="width: 250px; text-align: center; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    YTD
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 250px; vertical-align: top; padding-left: 5px; text-align: left; font-size: 15px;border: 1px solid black;">
+                                    Gross Salary<br/>
+                                    Travel Allowance<br/>
+                                    Food<br/>
+                                    Accommodation<br/>
+                                    Entertainment<br/>
+                                    Holiday OT<br/>
+                                    Over Time<br/>
+                                    <t t-if="doc.maternity_period">
+                                        Maternity Salary<br/>
+                                    </t>
+                                    <t t-if="doc.vacation_period">
+                                        Vacation Salary<br/>
+                                    </t>
+                                    <t t-if="doc.bonus">
+                                        Bonus<br/>
+                                    </t>
+                                </td>
+                                <td style="width: 250px; vertical-align: top; padding-right: 5px; text-align: right; font-size: 15px;border: 1px solid black;">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                       <t t-if="line.code == 'BASIC'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                      </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                       <t t-if="line.code == 'TA'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                      </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                       <t t-if="line.code == 'FC'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                      </t>
+                                    </t><br/>
+                                     <t t-foreach="doc.line_ids" t-as="line">
+                                       <t t-if="line.code == 'ACC'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                      </t>
+                                    </t><br/>
+                                     <t t-foreach="doc.line_ids" t-as="line">
+                                       <t t-if="line.code == 'EA'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                      </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                       <t t-if="line.code == 'HOT'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                      </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                       <t t-if="line.code == 'NOT'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                      </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                      <t t-if="doc.maternity_period">
+                                           <t t-if="line.code == 'MAT'">
+                                              <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                          </t>
+                                      </t>
+                                    </t>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                      <t t-if="doc.vacation_period">
+                                           <t t-if="line.code == 'VAC'">
+                                              <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                          </t>
+                                      </t>
+                                    </t>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                      <t t-if="doc.bonus">
+                                           <t t-if="line.code == 'BONUS'">
+                                              <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                          </t>
+                                      </t>
+                                    </t><br/>
+                                </td>
+                                <td style="width: 250px; vertical-align: top; padding-right: 5px; text-align: right; font-size: 15px;border: 1px solid black;">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTD'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTD'">
+                                          <t t-esc="0.0" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTD'">
+                                          <t t-esc="0.0" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTD'">
+                                          <t t-esc="0.0" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTD'">
+                                          <t t-esc="0.0" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTD'">
+                                          <t t-esc="0.0" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTD'">
+                                          <t t-esc="0.0" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                </td>
+                                <td style="width: 250px; padding-left: 5px; text-align: left; font-size: 15px;border: 1px solid black;vertical-align:top;">
+                                    NIS <br/>
+                                    NHT <br/>
+                                    ED TAX<br/>
+                                    Loan Repayment<br/>
+                                    PAYE
+                                </td>
+                                <td style="width: 250px; padding-right: 5px; text-align: right; font-size: 15px;border: 1px solid black;vertical-align:top;">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'NIS'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'NHT'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'EDT'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'LOAN'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'PAYE'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t>
+                                </td>
+                                <td style="width: 250px; padding-left: 5px; text-align: right; font-size: 15px;border: 1px solid black;vertical-align:top;">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTDNIS'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTDNHT'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTDEDT'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTDEDT'">
+                                          <t t-esc="0.0" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'YTDPAYE'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 250px; padding-left: 5px; text-align: left; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    Total Earnings
+                                </td>
+                                <td style="width: 250px; padding-right: 5px; text-align: right; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'GROSS'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t><br/>
+                                </td>
+                                <td style="width: 250px; padding-right: 5px; text-align: right; font-size: 15px;border: 1px solid black;font-weight: bold;">
+
+                                </td>
+                                <td style="width: 250px; padding-left: 5px; text-align: left; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    Total Deductions
+                                </td>
+                                <td style="width: 250px; padding-right: 5px; text-align: right; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'TD'">
+                                          <t t-esc="line.total" t-options='{"widget": "float", "precision": 2}'/>
+                                        </t>
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td  colspan="2" style="width: 720px; padding-left: 5px; text-align: left; font-size: 15px;">
+                                    <b>Amount (in words):</b><br/>
+                                        <span t-esc="docs.net_amount_to_text()"/>
+                                </td>
+                                <td style="width: 195px; padding-left: 5px; text-align: left; font-size: 15px;border: 1px solid black;font-weight: bold;">
+                                    NET AMOUNT
+                                </td>
+                                <td style="width: 195px; text-align: right; font-size: 15px;border: 1px solid black;">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.code == 'NET'">
+                                          <t t-esc="round(line.total)"/>
+                                        </t>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 1000px; text-align: center; font-size: 15px;height:60px;vertical-align:bottom;" colspan="4">
+                                    This is a computer generated salary slip. signature is not required
+                                </td>
+                            </tr>
+                        </table>
+                    </t>
+                </div>
+            </div>
+            <div style="text-align: center;"></div>
+            </div>
+        </t>
+    </template>
+</odoo>
