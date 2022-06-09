@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_suspension" model="report.paperformat">
+        <field name="name">Suspension report</field>
+        <field name="default" eval="False"/>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">12</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="True"/>
+        <field name="header_spacing">5</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="suspension" model="ir.actions.report">
+        <field name="name">Suspension Report</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">jnj_reports.suspension_template</field>
+        <field name="report_file">jnj_reports.suspension_template</field>
+        <field name="paperformat_id" ref="jnj_reports.paperformat_suspension"/>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

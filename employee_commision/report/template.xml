@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="commission_payslip_template">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page" width="100%">
+                    <style>
+
+                        .employee_details{
+
+                        }
+                    </style>
+                    <div class="row" style="width:100%; height:80px;">
+                        <div class="col-6" style="text-align: center;">
+                            <h2 style="vertical-align:middle;">Store Name</h2>
+                        </div>
+                        <div class="col-6">
+                            <span style="float:right; padding-right:100px;"><img t-att-src="image_data_uri(company_id.logo)"
+                                         width="70px" height="70px" alt="Logo"/></span>
+                        </div>
+                    </div>
+                    <div style="padding-top: 10px; width:100%; padding-left:20px;">
+                        C/O J &amp; J United Limited
+                    </div>
+                    <div class="row" style="padding-top: 10px; width:100%; padding-left:20px;">
+                        <div class="col-5" style="text-align: left; ">
+                            Employee Id: &amp;nbsp;<span t-field="commission_id.employee_id.name"/>
+                        </div>
+                        <div class="col-7" style="text-align: left;">
+                            Employee Name: &amp;nbsp;<span t-field="commission_id.employee_id.name"/>
+                        </div>
+                    </div>
+                    <div style="padding-left:20px;">
+                        Job Position: &amp;nbsp;<span t-field="commission_id.conf_id.employee_type"/>
+                    </div>
+                    <div style="padding-left:20px; width:100%;">
+                            <span>Commission Period :</span>
+                            &amp;nbsp; <span style="padding-left:5px;">From date:</span>
+                            &amp;nbsp; <span style="padding-left:5px;" t-esc="date_from"/>
+                            &amp;nbsp; <span style="padding-left:5px;">To date</span>
+                            &amp;nbsp; <span style="padding-left:5px;" t-esc="date_to"/>
+                    </div>
+                    <div style="padding-left:20px;">
+                        Total Sales done during the period :&amp;nbsp;<span t-esc="commission_id.get_pending_commission_total_sale_sum(wizard_id)"/>  JMD
+                    </div>
+                     <div style="padding-left:20px;">
+                        Commission Percentage :&amp;nbsp;<span t-esc="commission_id.conf_id.commission_percentage"/>  %
+                    </div>
+                     <div style="padding-left:20px;">
+                        Commission Amount   :&amp;nbsp;<span t-esc="commission_id.get_pending_commission_amount_sum(wizard_id)"/>  JMD
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="commission_payslip_report">
+        <t t-set="company_id" t-value="company"/>
+        <t t-foreach="commission_ids" t-as="commission_id">
+            <t t-call="employee_commision.commission_payslip_template"/>
+        </t>
+    </template>
+</odoo>
