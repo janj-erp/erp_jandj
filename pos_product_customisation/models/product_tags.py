@@ -57,6 +57,25 @@ class ProductTemplate(models.Model):
         if self.list_price < 10:
             raise ValidationError('Please enter a valid sales price')
 
+    def add_template_category(self):
+        for rec in self:
+            if rec.name != rec.pos_categ_id.name:
+                template_categ = self.env['pos.category'].create({
+                    'name': rec.name,
+                    'parent_id': rec.pos_categ_id.id,
+                    'image_128': rec.image_128
+                })
+                for variant in rec.product_variant_ids:
+                    variant.pos_categ_id = template_categ
+
+    def remove_template_category(self):
+        for rec in self:
+            if rec.name == rec.pos_categ_id.name:
+                parent_categ = rec.product_variant_ids.pos_categ_id.parent_id
+                rec.product_variant_ids.pos_categ_id.unlink()
+                for variant in rec.product_variant_ids:
+                    variant.pos_categ_id = parent_categ
+
 
 class Product(models.Model):
     _inherit = 'product.product'
