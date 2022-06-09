@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_employee_experience_details,access.employee.experience,model_employee_experience,hr.group_hr_user,1,1,1,1
-access_employee_qualification,access.employee.qualification,model_employee_qualification,hr.group_hr_user,1,1,1,1
-access_layoff_wizard,access.add.layoff,model_add_layoff,hr.group_hr_user,1,1,1,1
-access_termination_reason_details,access.employee.termination,model_employee_termination,,1,1,1,1
-
