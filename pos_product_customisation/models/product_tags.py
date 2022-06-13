@@ -52,7 +52,7 @@ class ProductTemplate(models.Model):
             product.product_variant_ids.default_code = code
             product.default_code = code
 
-    # @api.constrains('list_price')
+    @api.constrains('list_price')
     def list_price_validation(self):
         if self.list_price < 10:
             raise ValidationError('Please enter a valid sales price')
