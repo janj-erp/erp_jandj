@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pos_advance_sale_tree_view" model="ir.ui.view">
+        <field name="name">pos.advance.sale.tree</field>
+        <field name="model">pos.advance.sale</field>
+        <field name="arch" type="xml">
+            <tree string="Packs">
+                <field name="name"/>
+                <field name="pos_config"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pos_advance_sale_form_view" model="ir.ui.view">
+        <field name="name">pos.advance.sale.form</field>
+        <field name="model">pos.advance.sale</field>
+        <field name="arch" type="xml">
+            <form string="Pack">
+                <header>
+                    <button name="mark_transferred" string="Mark Transferred" type="object" attrs="{'invisible': [('is_moved_physically', '=', True)]}"/>
+                    <button name="mark_delivered" string="Mark Delivered" attrs="{'invisible': ['|', ('is_moved_physically', '=', False), ('state', '=', 'delivered')]}" type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group colspan="2">
+                            <div class="oe_title">
+                                <div class="oe_edit_only">
+                                    <label for="name" string="POS Order ref"/>
+                                </div>
+                                <h1>
+                                    <field name="name"/>
+                                </h1>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="oe_edit_only">
+                                    <label for="pos_config" string="Store Name"/>
+                                </div>
+                                <h2>
+                                    <field name="pos_config" widget="many2one"/>
+                                    <field name="is_moved_physically" invisible="1"/>
+                                    <br/>
+                                    <field name="order_id" widget="many2one"/>
+                                </h2>
+                            </div>
+                        </group>
+                        <group colspan="2">
+                            <field name="pos_lines" widget="one2many" nolabel="1">
+                                <tree string="Products" mode="tree">
+                                    <field name="product_id" widget="many2one"/>
+                                    <field name="quantity"/>
+                                    <field name="warehouse_id" widget="many2one"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                 </sheet>
+             </form>
+         </field>
+    </record>
+
+    <record id="pos_advance_sale_filter" model="ir.ui.view">
+            <field name="name">pos.advance.sale.search</field>
+            <field name="model">pos.advance.sale</field>
+            <field name="arch" type="xml">
+                <search string="Search Leads">
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="state" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+
+    <record id="action_pos_advance_sale" model="ir.actions.act_window">
+        <field name="name">POS Advance Sales</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.advance.sale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Start a new Advance Sale type POS order
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            action="action_pos_advance_sale"
+            name="POS Advance Sales"
+            id="menu_action_pos_advance_sale"
+            parent="stock.menu_stock_warehouse_mgmt"
+            sequence="21"/>
+
+
+<!--    Lines View-->
+
+
+    <record id="pos_advance_sale_line_tree_view" model="ir.ui.view">
+        <field name="name">pos.advance.sale.line.tree</field>
+        <field name="model">pos.advance.sale.line</field>
+        <field name="arch" type="xml">
+            <tree string="Packs">
+                <field name="pos_id" widget="many2one"/>
+                <field name="product_id" widget="many2one"/>
+                <field name="quantity"/>
+                <field name="warehouse_id" widget="many2one"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pos_advance_sale_line_filter" model="ir.ui.view">
+            <field name="name">pos.advance.sale.line.search</field>
+            <field name="model">pos.advance.sale.line</field>
+            <field name="arch" type="xml">
+                <search string="Search Leads">
+                    <group expand="0" string="Group By">
+                        <filter string="Warehouse" name="warehouse_id" context="{'group_by':'warehouse_id'}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+
+    <record id="action_pos_advance_sale_line" model="ir.actions.act_window">
+        <field name="name">POS Advance Sale Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.advance.sale.line</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Start a new Advance Sale type POS order
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            action="action_pos_advance_sale_line"
+            name="POS Advance Sales Lines"
+            id="menu_action_pos_advance_sale_line"
+            parent="stock.menu_stock_warehouse_mgmt"
+            sequence="22"/>
+
+</odoo>
