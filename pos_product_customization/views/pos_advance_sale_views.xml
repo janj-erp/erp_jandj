@@ -20,10 +20,12 @@
             <form string="Pack">
                 <header>
                     <button name="mark_transferred" string="Mark Transferred" type="object" attrs="{'invisible': [('is_moved_physically', '=', True)]}"/>
+
                     <button name="mark_delivered" string="Mark Delivered" attrs="{'invisible': ['|', ('is_moved_physically', '=', False), ('state', '=', 'delivered')]}" type="object"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
+
                     <group>
                         <group colspan="2">
                             <div class="oe_title">
@@ -94,6 +96,15 @@
             sequence="21"/>
 
 
+<!--    ir.actions.server-->
+    <record id="model_account_move_action_advance_sale_line" model="ir.actions.server">
+            <field name="name">Change state</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_pos_advance_sale_line"/>
+            <field name="binding_model_id" ref="model_pos_advance_sale_line"/>
+            <field name="state">code</field>
+            <field name="code">records.chane_state()</field>
+        </record>
 <!--    Lines View-->
 
 
@@ -106,6 +117,7 @@
                 <field name="product_id" widget="many2one"/>
                 <field name="quantity"/>
                 <field name="warehouse_id" widget="many2one"/>
+                <field name="store_pos_id" widget="many2one"/>
                 <field name="state"/>
             </tree>
         </field>
