@@ -58,5 +58,27 @@
         <field name="perm_unlink" eval="1"/>
         <field name="groups" eval="[(4, ref('employee_customization.group_show_tree_employee_records'))]"/>
     </record>
+    
+    <record id="users_pos_order_rule" model="ir.rule">
+        <field name="name">Store Current User Rules</field>
+        <field ref="point_of_sale.model_pos_order" name="model_id"/>
+        <field name="domain_force">[('session_id.config_id.picking_type_id.warehouse_id','=',user.property_warehouse_id.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="groups" eval="[(4, ref('employee_customization.group_show_tree_employee_records'))]"/>
+    </record>
+    
+    <record id="users_pos_order_line_rule" model="ir.rule">
+        <field name="name">Store Current User Rules</field>
+        <field ref="pos_product_customization.model_pos_advance_sale" name="model_id"/>
+        <field name="domain_force">[('pos_config.picking_type_id.warehouse_id','=',user.property_warehouse_id.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="groups" eval="[(4, ref('employee_customization.group_show_tree_employee_records'))]"/>
+    </record>
 
 </odoo>
