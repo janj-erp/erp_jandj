@@ -99,10 +99,12 @@ class Product(models.Model):
                 self.env['pos.advance.sale'].sudo().create({'name': order_name, 'pos_config': pos_config})
         order.pos_lines.sudo().unlink()
         for i in range(len(products)):
+            pos_warehouse = self.env['pos.config'].browse(pos_config).picking_type_id.warehouse_id
             order.pos_lines += self.env['pos.advance.sale.line'].sudo().create({
                 'product_id': products[i],
                 'quantity': quants[i],
                 'warehouse_id': int(warehouses[i]),
+                'store_pos_id': pos_warehouse.id,
             })
         for i in range(len(products)):
             w = int(warehouses[i])
@@ -223,23 +225,35 @@ class POSAdvanceSale(models.Model):
         for rec in self:
             rec.state = 'paid'
 
+    def mark_part_paid(self):
+        for rec in self:
+            rec.state = 'part_paid'
+
+
+
+
+
 
 class POSAdvanceSaleLine(models.Model):
     _name = 'pos.advance.sale.line'
+
     _description = 'pos.advance.sale.line'
 
     name = fields.Char('Order Name', related='pos_id.name')
     product_id = fields.Many2one('product.product', 'Product', readonly=True)
     quantity = fields.Float('Required Quantity', readonly=True)
-    warehouse_id = fields.Many2one('stock.warehouse', 'From Warehouse', readonly=True)
+    warehouse_id = fields.Many2one('stock.warehouse', 'From Location', readonly=True)
     pos_id = fields.Many2one('pos.advance.sale', 'POS Order', readonly=True, ondelete='cascade')
     state = fields.Selection([
         ('new', 'Transfer Pending'),
         ('moved', 'Goods Transferred'),
         ('delivered', 'Goods Delivered'),
     ], string='Status', default='new')
+    store_pos_id = fields.Many2one('stock.warehouse', 'To Location', readonly=True,)
 
-
+    def chane_state(self):
+        for rec in self:
+            rec.state = 'moved'
 
 
 
