@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_action_attendance_sync_wizard" model="ir.ui.view">
+        <field name="name">view.action.attendance.sync.wizard</field>
+        <field name="model">attendance.sync.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Compute Asset">
+                <group>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                </group>
+                <footer>
+                    <button string="Synchronise" name="synchronise_attendance_records" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+         </field>
+    </record>
+
+    <record id="action_attendance_sync_wizard" model="ir.actions.act_window">
+        <field name="name">Attendance Sync Wizard</field>
+        <field name="res_model">attendance.sync.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context"></field>
+    </record>
+
+    <menuitem
+        id="menu_item_action_attendance_sync_wizard"
+        parent="hr_attendance.menu_hr_attendance_root"
+        action="time_office_attendance_integration.action_attendance_sync_wizard"
+        name="Sync Attendance"
+        sequence="13"
+        />
+
+</odoo>

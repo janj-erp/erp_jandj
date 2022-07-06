@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="appointment_letter_template">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="doc">
+                        <div>
+                            <center>
+                                <hr style="border-bottom: 1px solid black;"/>
+                                <h4>c/o J AND J UNITED LIMITED </h4>
+                                <hr style="border-bottom: 1px solid black;"/>
+                            </center>
+                        </div>
+                        <div>
+                            <span>Address:</span>
+                            <span t-esc="doc.company_id.street"/>, <span t-esc="doc.company_id.street2"/>,
+                            <span t-esc="doc.company_id.city"/>, <span t-esc="doc.company_id.state_id.name"/>,
+                            <span t-esc="doc.company_id.country_id.name"/>, <span t-esc="doc.company_id.zip"/>
+                        </div>
+                        <div style="height:20px;"/>
+                        <div>
+                            <span>Date :</span> <span t-esc="datetime.datetime.now().strftime('%d-%m-%y')"/>
+                        </div>
+                        <div style="height:20px;"/>
+                        <div>
+                            <span style="font-weight: bold;">Re: Employment Offer</span>
+                        </div>
+                        <div style="height:20px;"/>
+                        <div>
+                            <span>Dear </span><span t-esc="doc.partner_name"/>,
+                        </div>
+                        <div style="height:20px;"/>
+                        <div>
+                            <p>
+                                We are pleased to offer you employment in the position of
+                                <span style="font-weight: bold;" t-esc="doc.job_id.name"/> with
+                                <span style="font-weight: bold;" t-esc="doc.department_id.name"/>.
+                                Your commencement date will be
+                                <span style="font-weight: bold;" t-esc="doc.availability"/>
+                                and this position reports directly to the Manager,
+                                <span style="font-weight: bold;" t-esc="doc.department_id.manager_id.name"/>.
+                            </p>
+                            <p>
+                                The first <span style="font-weight: bold;" t-esc="doc.probationary_period"/>
+                                days of your employment will be a probationary period and your continued employment
+                                will be dependent on your successful completion of this period.
+                            </p>
+                            <p>Your remuneration package will consist of the following:</p>
+                            <p style="padding-left: 30px;">
+                                Salary of <span style="font-weight: bold;" t-esc="doc.probationary_period_salary"/>,
+                                payable on a <span style="font-weight: bold;" t-esc="doc.probationary_period_basis"/>
+                                basis for the first
+                                <span style="font-weight: bold;" t-esc="doc.probationary_period"/> days.
+                                On successful completion of probationary period you will be
+                                remunerated a Salary of <span style="font-weight: bold;" t-esc="doc.permanent_salary"/>
+                                taxable, payable on a <span style="font-weight: bold;" t-esc="doc.permanent_basis"/>
+                                basis in addition a <span style="font-weight: bold;" t-esc="doc.allowance"/> allowance.
+                            </p>
+                            <p>
+                                Termination of this appointment will require two weeks’ notice by either party.
+                                However, in the case of serious misconduct, no notice is required.
+                            </p>
+                            <p>
+                                The responsibility of your position will be communicated to you either verbally or set
+                                out in your job responsibility letter which you will receive subsequently.
+                            </p>
+                            <p>
+                                Your signature below is your acknowledgement that this offer letter (along with the
+                                final form of any referenced documents), represents the entire agreement between you
+                                and <span t-esc="doc.company_id.name"/>, and that no verbal or written agreements, promises or
+                                representations that are not specifically stated in this offer will be binding upon
+                                J &amp; J United Limited.
+                            </p>
+                            <p>
+                                <span t-esc="doc.department_id.manager_id.name"/>
+                                is looking forward to having you on our team and wishes you well
+                                in your position.
+                            </p>
+                            <p>
+                                Yours Sincerely
+                            </p>
+                            <p>
+                                Director.
+                            </p>
+                        </div>
+                        <div style="height:20px;"/>
+                        <div>
+                            <span style="font-weight: bold;">Acknowledgement</span>
+                            <div style="height:20px;"/>
+                            <p>
+                                I, <span style="font-weight: bold;" t-esc="doc.partner_name"/>, have read and understand the above-mentioned terms and
+                                conditions on confirmation to the position of
+                                <span style="font-weight: bold;" t-esc="doc.job_id.name"/>.
+                            </p>
+                            <div style="height:20px;"/>
+                            <span>Signature :</span>
+                            <br/>
+                            <span>Date :</span>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

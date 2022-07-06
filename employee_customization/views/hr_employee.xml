@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="view_hr_employee_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='job_title']" position="replace">
+                <field name="read_id" invisible="1"/>
+                <field name="job_title" attrs="{'readonly': [('read_id', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='mobile_phone']" position="before">
+                <field name="job_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_number_inherit" model="ir.ui.view">
+        <field name="name">res.bank.form.view</field>
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="branch_name"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_bank_account_inherit" model="ir.ui.view">
+        <field name="name">res.bank.form.view</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='acc_number']" position="after">
+                <field name="account_type"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

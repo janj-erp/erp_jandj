@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ProductSelectPopup" owl="1">
+        <div role="dialog" class="modal-dialog">
+            <Draggable>
+                <div class="popup product-select-popup">
+                    <header class="title">
+                        <t t-esc="props.title"/>
+                    </header>
+                    <main class="body" style="overflow-y: scroll !important;">
+                        <div class="section-intro">
+                            <t t-esc="props.body"/>
+                        </div>
+                        <br/><br/>
+                        <div class="section-list">
+                            <table>
+                                <t t-foreach="props.products" t-as="product">
+                                    <tr style="padding:10px;">
+    <!--                                <span style="text-align: left;">-->
+                                        <td rowspan="2" style="padding:2px; padding-left:10px;">
+                                            <t t-esc="product_index + 1"/>.
+                                        </td>
+                                        <td rowspan="2" style="padding:2px;">
+                                            <img t-att-src="product[0]" t-att-alt="product[2].full_product_name"/>
+                                        </td>
+                                        <td style="padding:2px;">
+                                            <t t-esc="product[2].full_product_name"/> (Required: <t t-esc="product[2].qty"/> Nos)
+                                        </td>
+                                    </tr>
+                                    <tr style="padding:10px;">
+                                        <td style="padding:2px;">
+                                            <select class="type" style="width: 300px;height:50px" t-model="state.selected_warehouses[product_index]" required="">
+                                                    <t t-foreach="state.warehouses[product_index]" t-as="item" t-key="item.name">
+                                                        <option t-att-value="item.id" t-esc="item.name"/>
+                                                    </t>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </main>
+                    <footer class="footer drag-handle">
+                        <div class="button confirm" t-on-click="confirm_post">
+                            <t t-esc="props.confirmText" />
+                        </div>
+                        <div class="button confirm" t-on-click="cancel">
+                            Cancel
+                        </div>
+                    </footer>
+                </div>
+            </Draggable>
+        </div>
+    </t>
+
+</templates>

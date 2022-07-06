@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    Timeoff creation Form-->
+   <template id="timeoff_creation_form">
+       <t t-call="website.layout">
+           <div id="wrap" class="oe_structure oe_empty">
+               <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                   <div class="container">
+                       <sheet>
+                           <form action="/timeoff/created/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-model_name="" data-success-page="">
+                               <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                               <div class="s_website_form_rows row s_col_no_bgcolor">
+                                   <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                       <div class="row s_col_no_resize s_col_no_bgcolor">
+                                           <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+                                               <span class="s_website_form_label_content">Timeoff Type</span>
+                                               <span class="s_website_form_mark"> *</span>
+                                           </label>
+                                           <div class="col-sm">
+                                               <select name="holiday_status_id" t-attf-class="form-control s_website_form_input" required="1">
+                                                   <t t-foreach="holiday_status_id or []" t-as="holiday_status">
+                                                       <option t-att-value="holiday_status.id">
+                                                           <t t-esc="holiday_status.name" />
+                                                           <t t-if="holiday_status.virtual_remaining_leaves &gt; 0">
+                                                                (<t t-esc="holiday_status.virtual_remaining_leaves" /> Days Left)
+                                                           </t>
+                                                           <t t-else="">
+                                                               <t t-esc="0"/>
+                                                           </t>
+                                                       </option>
+                                                   </t>
+                                               </select>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div style="display:none;" class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                       <div class="row s_col_no_resize s_col_no_bgcolor">
+                                           <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+                                               <span class="s_website_form_label_content">User</span>
+                                               <span class="s_website_form_mark"> *</span>
+                                           </label>
+                                           <div class="col-sm">
+                                               <select  name="user_id" t-attf-class="form-control s_website_form_input"
+                                                        required="1" readonly="1">
+                                                   <option t-att-value="user_id.id">
+                                                       <t t-esc="user_id.name" />
+                                                   </option>
+                                               </select>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                       <div class="row s_col_no_resize s_col_no_bgcolor">
+                                           <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+                                               <span class="s_website_form_label_content">Employee</span>
+                                               <span class="s_website_form_mark"> *</span>
+                                           </label>
+                                           <div class="col-sm">
+                                               <select  name="employee_id" t-attf-class="form-control s_website_form_input" readonly="1"
+                                                        required="1">
+                                                   <option t-att-value="employee_id.id">
+                                                       <t t-esc="employee_id.name" />
+                                                   </option>
+                                               </select>
+                                           </div>
+                                       </div>
+                                   </div>
+                                    <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                       <div class="row s_col_no_resize s_col_no_bgcolor">
+                                           <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+                                               <span class="s_website_form_label_content">Dates</span>
+                                               <span class="s_website_form_mark"> *</span>
+                                           </label>
+                                           <div class="col-sm">
+                                               <label for="start">From</label>
+                                                <input type="date" id="date_from" name="date_from"
+                                                       value=""/>
+                                               <label for="end">To</label>
+                                                <input type="date" id="date_to" name="date_to"
+                                                       value=""/>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                       <div class="row s_col_no_resize s_col_no_bgcolor">
+                                           <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+                                               <span class="s_website_form_label_content">Description</span>
+                                           </label>
+                                           <div class="col-sm">
+                                            <input id="name" type="text" class="form-control s_website_form_input" name="name"/>
+                                           </div>
+                                       </div>
+                                   </div>
+
+                                   <div class="form-group col-6 s_website_form_submit" data-name="Submit Button">
+                                       <div style="width: 200px;" class="s_website_form_label"/>
+                                       <button type="submit" class="btn btn-primary">Submit</button>
+                                   </div>
+                                    <div class="form-group col-2 s_website_form_submit" data-name="Back Button">
+                                       <div style="width: 200px;" class="s_website_form_label"/>
+                                       <button type="submit">
+                                           <a href="/my/timeoffs"><i class="fa fa-repeat"/> Back </a></button>
+                                   </div>
+                               </div>
+                           </form>
+                       </sheet>
+                   </div>
+               </section>
+           </div>
+       </t>
+   </template>
+
+     <record id="timeoff_created" model="website.page">
+        <field name="name">Timeoff Created</field>
+        <field name="type">qweb</field>
+        <field name="url">/timeoff/created</field>
+        <field name="website_published">True</field>
+        <field name="key">timeoff_custom.timeoff_created</field>
+        <field name="arch" type="xml">
+            <t name="Thanks" t-name="timeoff_custom.timeoff_created">
+                <t t-call="website.layout">
+                  <div id="wrap">
+                    <div class="container">
+                        <h1>Thanks!</h1>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="alert alert-success" role="status">
+                                    The time off has been created successfully.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+    <record id="timeoff_invalid" model="website.page">
+        <field name="name">Timeoff Invalid</field>
+        <field name="type">qweb</field>
+        <field name="url">/timeoff/invalid</field>
+        <field name="website_published">True</field>
+        <field name="key">timeoff_custom.timeoff_invalid</field>
+        <field name="arch" type="xml">
+            <t name="Invalid" t-name="timeoff_custom.timeoff_invalid">
+                <t t-call="website.layout">
+                  <div id="wrap">
+                    <div class="container">
+                        <h1>Request Denied!</h1>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="alert alert-success" role="status">
+                                    <t t-esc="error_message"/><br/>
+                                    Please contact your manager!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+<!--    <record id="timeoff_exceeded" model="website.page">-->
+<!--        <field name="name">Timeoff Exceeded</field>-->
+<!--        <field name="type">qweb</field>-->
+<!--        <field name="url">/timeoff/exceeded</field>-->
+<!--        <field name="website_published">True</field>-->
+<!--        <field name="key">timeoff_custom.timeoff_exceeded</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <t name="Invalid" t-name="timeoff_custom.timeoff_exceeded">-->
+<!--                <t t-call="website.layout">-->
+<!--                  <div id="wrap">-->
+<!--                    <div class="container">-->
+<!--                        <h1>Time Off exceeded!</h1>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-8">-->
+<!--                                <div class="alert alert-success" role="status">-->
+<!--                                    <t t-esc="error_message"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--        </field>-->
+<!--    </record>-->
+
+</odoo>
