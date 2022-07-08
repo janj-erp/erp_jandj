@@ -2,7 +2,7 @@
 
 {
     'name': 'Product Stock Moves from POS',
-    'version': '1.3',
+    'version': '1.5',
     'category': 'Point of Sale',
     'summary': '''1. Request Products from POS Interface \n
                   2. Update Product's quantity from POS Interface''',
@@ -34,6 +34,7 @@
             "pos_product_customization/static/src/js/new_order.js",
             "pos_product_customization/static/src/js/validate_popup.js",
             "pos_product_customization/static/src/js/product_select_popup.js",
+            "pos_product_customization/static/src/js/FixedDiscountButton.js",
         ],
         'web.assets_qweb': [
             'pos_product_customization/static/src/xml/*',

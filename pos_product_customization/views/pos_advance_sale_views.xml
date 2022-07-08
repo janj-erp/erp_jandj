@@ -20,7 +20,6 @@
             <form string="Pack">
                 <header>
                     <button name="mark_transferred" string="Mark Transferred" type="object" attrs="{'invisible': [('is_moved_physically', '=', True)]}"/>
-
                     <button name="mark_delivered" string="Mark Delivered" attrs="{'invisible': ['|', ('is_moved_physically', '=', False), ('state', '=', 'delivered')]}" type="object"/>
                     <field name="state" widget="statusbar"/>
                 </header>
@@ -98,13 +97,22 @@
 
 <!--    ir.actions.server-->
     <record id="model_account_move_action_advance_sale_line" model="ir.actions.server">
-            <field name="name">Change state</field>
-            <field name="type">ir.actions.server</field>
-            <field name="model_id" ref="model_pos_advance_sale_line"/>
-            <field name="binding_model_id" ref="model_pos_advance_sale_line"/>
-            <field name="state">code</field>
-            <field name="code">records.chane_state()</field>
-        </record>
+        <field name="name">Mark as sent</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_pos_advance_sale_line"/>
+        <field name="binding_model_id" ref="model_pos_advance_sale_line"/>
+        <field name="state">code</field>
+        <field name="code">records.mark_as_sent()</field>
+    </record>
+    <!--    ir.actions.server-->
+    <record id="model_account_move_action_advance_sale_line_mark_as_receive" model="ir.actions.server">
+        <field name="name">Mark as receive</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_pos_advance_sale_line"/>
+        <field name="binding_model_id" ref="model_pos_advance_sale_line"/>
+        <field name="state">code</field>
+        <field name="code">records.mark_as_receive()</field>
+    </record>
 <!--    Lines View-->
 
 
@@ -129,16 +137,20 @@
             <field name="arch" type="xml">
                 <search string="Search Leads">
                     <group expand="0" string="Group By">
-                        <filter string="Warehouse" name="warehouse_id" context="{'group_by':'warehouse_id'}"/>
+                        <filter string="From Location" name="from" context="{'group_by':'warehouse_id'}"/>
+                        <filter string="To Location" name="to" context="{'group_by':'store_pos_id'}"/>
+                        <filter string="Status" name="state" context="{'group_by':'state'}"/>
                     </group>
                 </search>
             </field>
     </record>
 
     <record id="action_pos_advance_sale_line" model="ir.actions.act_window">
-        <field name="name">POS Advance Sale Lines</field>
+        <field name="name">POS Advance Sale Lines From</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">pos.advance.sale.line</field>
+        <field name="context">{'search_default_state': 1,}</field>
+        <field name="domain">[('user_warehouse_from_id', '=', True)]</field>
         <field name="view_mode">tree</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
@@ -149,9 +161,50 @@
 
     <menuitem
             action="action_pos_advance_sale_line"
-            name="POS Advance Sales Lines"
+            name="POS Advance Sales Lines (Send)"
             id="menu_action_pos_advance_sale_line"
             parent="stock.menu_stock_warehouse_mgmt"
             sequence="22"/>
+
+    <record id="action_pos_advance_sale_line_to" model="ir.actions.act_window">
+        <field name="name">POS Advance Sale Lines To</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.advance.sale.line</field>
+        <field name="context">{'search_default_state': 1,}</field>
+        <field name="domain">[('user_warehouse_to_id', '=', True)]</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Start a new Advance Sale type POS order
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            action="action_pos_advance_sale_line_to"
+            name="POS Advance Sales Lines (Receive)"
+            id="menu_action_pos_advance_sale_line_to"
+            parent="stock.menu_stock_warehouse_mgmt"
+            sequence="22"/>
+
+<!--    <record id="action_pos_advance_sale_line" model="ir.actions.act_window">-->
+<!--        <field name="name">POS Advance Sale Lines</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">pos.advance.sale.line</field>-->
+<!--        <field name="view_mode">tree</field>-->
+<!--        <field name="help" type="html">-->
+<!--            <p class="oe_view_nocontent_create">-->
+<!--                Start a new Advance Sale type POS order-->
+<!--            </p>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <menuitem-->
+<!--            action="action_pos_advance_sale_line"-->
+<!--            name="POS Advance Sales Lines (Receive)"-->
+<!--            id="menu_action_pos_advance_sale_line"-->
+<!--            parent="stock.menu_stock_warehouse_mgmt"-->
+<!--            sequence="22"/>-->
+
 
 </odoo>
