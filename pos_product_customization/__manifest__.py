@@ -26,7 +26,7 @@
     'auto_install': False,
     'assets': {
         'point_of_sale.assets': [
-            "pos_product_customization/static/src/js/item_quant.js",
+            # "pos_product_customization/static/src/js/item_quant.js",
             "pos_product_customization/static/src/js/info_as.js",
             "pos_product_customization/static/src/js/product_create_popup.js",
             # "pos_product_creation/static/src/js/product_create_button.js",

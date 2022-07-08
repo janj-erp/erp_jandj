@@ -23,6 +23,9 @@ odoo.define('pos_product_customization.ProductSelectPopup', function(require) {
         }
 
         async setinfo() {
+            this.props.products = this.props.products.filter(
+            (product) => !product[2].full_product_name.includes('Discount') && !product[2].full_product_name.includes('Expense')
+            );
             let len = this.props.products.length;
             this.state.selected_warehouses = new Array(len);
             this.state.warehouses = new Array(len);
