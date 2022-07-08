@@ -2,7 +2,7 @@
 
 {
     'name': 'Product Stock Moves from POS',
-    'version': '1.5',
+    'version': '1.3',
     'category': 'Point of Sale',
     'summary': '''1. Request Products from POS Interface \n
                   2. Update Product's quantity from POS Interface''',
