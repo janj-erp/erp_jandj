@@ -34,6 +34,7 @@
             "pos_product_customization/static/src/js/new_order.js",
             "pos_product_customization/static/src/js/validate_popup.js",
             "pos_product_customization/static/src/js/product_select_popup.js",
+            "pos_product_customization/static/src/js/FixedDiscountButton.js",
         ],
         'web.assets_qweb': [
             'pos_product_customization/static/src/xml/*',

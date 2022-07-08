@@ -70,6 +70,9 @@ odoo.define('pos_product_customization.validate_popup', function(require) {
             } else {
                 let lines = this.currentOrder.export_as_JSON().lines
                 for(let i = 0; i < lines.length; i++) {
+                    if (lines[i][2].full_product_name.includes('Discount') || lines[i][2].full_product_name.includes('Expense')){
+                        continue;
+                    }
                     let available_qty = await this.rpc({
                         model: 'product.product',
                         method: 'get_warehouse_quant',

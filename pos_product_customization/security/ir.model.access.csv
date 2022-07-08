@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_product_tags,access_product_tags,model_product_tags,,1,1,1,1
 access_pos_advance_sale,access_pos_advance_sale,model_pos_advance_sale,,1,1,0,1
-access_pos_advance_sale_line,access_pos_advance_sale_line,model_pos_advance_sale_line,,1,1,0,1
+access_pos_advance_sale_line,access_pos_advance_sale_line,model_pos_advance_sale_line,,1,1,0,0

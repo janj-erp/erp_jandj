@@ -99,6 +99,9 @@ class Product(models.Model):
                 self.env['pos.advance.sale'].sudo().create({'name': order_name, 'pos_config': pos_config})
         order.pos_lines.sudo().unlink()
         for i in range(len(products)):
+            product = self.env['product.product'].browse(products[i])
+            if product.detailed_type != 'product':
+                continue
             pos_warehouse = self.env['pos.config'].browse(pos_config).picking_type_id.warehouse_id
             order.pos_lines += self.env['pos.advance.sale.line'].sudo().create({
                 'product_id': products[i],
@@ -108,7 +111,10 @@ class Product(models.Model):
             })
         for i in range(len(products)):
             w = int(warehouses[i])
-            available_qty = self.env['product.product'].browse(products[i]).with_context({'warehouse': w}).qty_available
+            product = self.env['product.product'].browse(products[i])
+            if product.detailed_type != 'product':
+                continue
+            available_qty = product.with_context({'warehouse': w}).qty_available
             if available_qty < quants[i]:
                 order.state = 'new'
                 return [
@@ -130,8 +136,8 @@ class POSAdvanceSale(models.Model):
     state = fields.Selection([
         ('new', 'New'),
         ('valid', 'Valid'),
-        ('part_paid', 'Partially Paid'),
-        ('paid', 'Fully Paid'),
+        # ('part_paid', 'Partially Paid'),
+        ('paid', 'Paid'),
         ('delivered', 'Goods Delivered')
     ], string='Status', default='new')
     is_transferred = fields.Boolean('Inventory Transfer Done', default=False)
@@ -156,6 +162,9 @@ class POSAdvanceSale(models.Model):
 
     def confirm_availability(self):
         for line in self.pos_lines:
+            print(line.product_id.detailed_type)
+            if line.product_id.detailed_type != 'product':
+                continue
             available_qty = line.product_id.with_context({
                 'warehouse': line.warehouse_id.id,
             }).qty_available
@@ -230,10 +239,6 @@ class POSAdvanceSale(models.Model):
             rec.state = 'part_paid'
 
 
-
-
-
-
 class POSAdvanceSaleLine(models.Model):
     _name = 'pos.advance.sale.line'
 
@@ -246,15 +251,42 @@ class POSAdvanceSaleLine(models.Model):
     pos_id = fields.Many2one('pos.advance.sale', 'POS Order', readonly=True, ondelete='cascade')
     state = fields.Selection([
         ('new', 'Transfer Pending'),
-        ('moved', 'Goods Transferred'),
+        ('sent', 'Goods Sent'),
+        ('moved', 'Goods Received'),
         ('delivered', 'Goods Delivered'),
     ], string='Status', default='new')
     store_pos_id = fields.Many2one('stock.warehouse', 'To Location', readonly=True,)
+    user_warehouse_from_id = fields.Integer('user_warehouse_id', compute='compute_current_user_warehouse_id',
+                                            search='search_cur_ware')
+    user_warehouse_to_id = fields.Integer('user_warehouse_id', compute='compute_current_user_warehouse_to_id',
+                                          search='search_cur_to_ware')
 
-    def chane_state(self):
+    def compute_current_user_warehouse_id(self):
+        self.user_warehouse_from_id = self.env.user.property_warehouse_id and self.env.user.property_warehouse_id.id or 0
+
+    def search_cur_ware(self, operator, value):
+        id = self.env.user.property_warehouse_id and self.env.user.property_warehouse_id.id or 0
+        if not id:
+            lines = self.env['pos.advance.sale.line'].search([])
+        else:
+            lines = self.env['pos.advance.sale.line'].search([('warehouse_id', '=', id)])
+        return [('id', 'in', lines.mapped('id'))]
+
+    def compute_current_user_warehouse_to_id(self):
+        self.user_warehouse_to_id = self.env.user.property_warehouse_id and self.env.user.property_warehouse_id.id or 0
+
+    def search_cur_to_ware(self, operator, value):
+        id = self.env.user.property_warehouse_id and self.env.user.property_warehouse_id.id or 0
+        if not id:
+            lines = self.env['pos.advance.sale.line'].search([])
+        else:
+            lines = self.env['pos.advance.sale.line'].search([('store_pos_id', '=', id)])
+        return [('id', 'in', lines.mapped('id'))]
+
+    def mark_as_sent(self):
+        for rec in self:
+            rec.state = 'sent'
+
+    def mark_as_receive(self):
         for rec in self:
             rec.state = 'moved'
-
-
-
-
